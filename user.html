@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% extends 'base.html'%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+      {% block title %}
+      Register
+      {% endblock %}
+    </title>
+</head>
+<body>
+{% block content %}
+<center>
+<h1>Sign Up</h1>
+<h2> As a Doctor/Counsellor</h2></center>
+<strong>
+<div class="form-group">
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+<button class="btn btn-secondary"> Register </button></form>
+</div> </strong>
+{% endblock %}
+</body>
+</html>
