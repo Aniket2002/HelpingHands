@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Set Your Preferences - MindBridge{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+    <!-- Header -->
+    <div class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="py-6">
+                <h1 class="text-3xl font-bold text-gray-900">Tell Us About Your Needs</h1>
+                <p class="mt-1 text-sm text-gray-500">
+                    This information helps us find the best therapist matches for you. All information is confidential.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <form method="post" class="space-y-8">
+            {% csrf_token %}
+            
+            <!-- Primary Concerns -->
+            <div class="bg-white shadow rounded-lg p-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">What brings you here today?</h2>
+                <p class="text-sm text-gray-600 mb-4">Select all that apply. This helps us match you with therapists who specialize in your areas of concern.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {% for code, name in specializations %}
+                    <label class="flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="checkbox" name="specializations" value="{{ code }}" class="rounded border-gray-300 text-blue-600"
+                               {% if preferences and code in preferences.preferred_specializations %}checked{% endif %}>
+                        <span class="ml-3 text-sm text-gray-700">{{ name }}</span>
+                    </label>
+                    {% endfor %}
+                </div>
+                
+                <div class="mt-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Other concerns (optional)</label>
+                    <textarea name="other_concerns" rows="3" class="w-full border border-gray-300 rounded-md p-3 focus:ring-blue-500 focus:border-blue-500" 
+                              placeholder="Describe any other concerns or goals you'd like to work on...">{% if preferences %}{{ preferences.concerns|join:", " }}{% endif %}</textarea>
+                </div>
+            </div>
+
+            <!-- Therapy Preferences -->
+            <div class="bg-white shadow rounded-lg p-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">Therapy Approach Preferences</h2>
+                <p class="text-sm text-gray-600 mb-4">Do you have any preferences for therapeutic approaches? (Optional - many people aren't familiar with these)</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {% for code, name in therapy_approaches %}
+                    <label class="flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="checkbox" name="approaches" value="{{ code }}" class="rounded border-gray-300 text-blue-600"
+                               {% if preferences and code in preferences.preferred_therapy_approaches %}checked{% endif %}>
+                        <span class="ml-3 text-sm text-gray-700">{{ name }}</span>
+                    </label>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Personal Preferences -->
+            <div class="bg-white shadow rounded-lg p-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">Personal Preferences</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Gender Preference -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Therapist Gender Preference</label>
+                        <select name="gender_preference" class="w-full rounded-md border-gray-300">
+                            <option value="">No preference</option>
+                            <option value="female" {% if preferences and preferences.therapist_gender_preference == 'female' %}selected{% endif %}>Female</option>
+                            <option value="male" {% if preferences and preferences.therapist_gender_preference == 'male' %}selected{% endif %}>Male</option>
+                            <option value="non_binary" {% if preferences and preferences.therapist_gender_preference == 'non_binary' %}selected{% endif %}>Non-binary</option>
+                        </select>
+                    </div>
+
+                    <!-- Language Preference -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Preferred Languages</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" name="languages" value="english" class="rounded border-gray-300"
+                                       {% if preferences and 'english' in preferences.preferred_languages %}checked{% endif %}>
+                                <span class="ml-2 text-sm text-gray-700">English</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" name="languages" value="spanish" class="rounded border-gray-300"
+                                       {% if preferences and 'spanish' in preferences.preferred_languages %}checked{% endif %}>
+                                <span class="ml-2 text-sm text-gray-700">Spanish</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" name="languages" value="french" class="rounded border-gray-300"
+                                       {% if preferences and 'french' in preferences.preferred_languages %}checked{% endif %}>
+                                <span class="ml-2 text-sm text-gray-700">French</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Budget and Insurance -->
+            <div class="bg-white shadow rounded-lg p-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">Budget and Insurance</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Maximum Budget per Session</label>
+                        <select name="budget_max" class="w-full rounded-md border-gray-300">
+                            <option value="">No limit specified</option>
+                            <option value="50" {% if preferences and preferences.budget_max == 50 %}selected{% endif %}>Under $50</option>
+                            <option value="100" {% if preferences and preferences.budget_max == 100 %}selected{% endif %}>Under $100</option>
+                            <option value="150" {% if preferences and preferences.budget_max == 150 %}selected{% endif %}>Under $150</option>
+                            <option value="200" {% if preferences and preferences.budget_max == 200 %}selected{% endif %}>Under $200</option>
+                            <option value="250" {% if preferences and preferences.budget_max == 250 %}selected{% endif %}>Under $250</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Insurance Provider (if applicable)</label>
+                        <input type="text" name="insurance_provider" class="w-full rounded-md border-gray-300" 
+                               value="{% if preferences %}{{ preferences.insurance_provider }}{% endif %}"
+                               placeholder="Enter your insurance provider (e.g., Blue Cross Blue Shield, Aetna, Cigna)">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scheduling Preferences -->
+            <div class="bg-white shadow rounded-lg p-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">Scheduling Preferences</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">How often would you like to meet?</label>
+                        <select name="session_frequency" class="w-full rounded-md border-gray-300">
+                            <option value="weekly" {% if preferences and preferences.session_frequency == 'weekly' %}selected{% endif %}>Weekly</option>
+                            <option value="bi_weekly" {% if preferences and preferences.session_frequency == 'bi_weekly' %}selected{% endif %}>Every two weeks</option>
+                            <option value="monthly" {% if preferences and preferences.session_frequency == 'monthly' %}selected{% endif %}>Monthly</option>
+                            <option value="as_needed" {% if preferences and preferences.session_frequency == 'as_needed' %}selected{% endif %}>As needed</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Preferred Times</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" name="preferred_times" value="morning" class="rounded border-gray-300"
+                                       {% if preferences and 'morning' in preferences.preferred_times %}checked{% endif %}>
+                                <span class="ml-2 text-sm text-gray-700">Morning (8am - 12pm)</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" name="preferred_times" value="afternoon" class="rounded border-gray-300"
+                                       {% if preferences and 'afternoon' in preferences.preferred_times %}checked{% endif %}>
+                                <span class="ml-2 text-sm text-gray-700">Afternoon (12pm - 5pm)</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" name="preferred_times" value="evening" class="rounded border-gray-300"
+                                       {% if preferences and 'evening' in preferences.preferred_times %}checked{% endif %}>
+                                <span class="ml-2 text-sm text-gray-700">Evening (5pm - 8pm)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Urgency and Experience -->
+            <div class="bg-white shadow rounded-lg p-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">Timeline and Experience</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">How soon would you like to start?</label>
+                        <select name="urgency" class="w-full rounded-md border-gray-300">
+                            {% for code, description in urgency_levels %}
+                            <option value="{{ code }}" {% if preferences and preferences.urgency == code %}selected{% endif %}>
+                                {{ description }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Previous therapy experience?</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="radio" name="previous_experience" value="yes" class="border-gray-300 text-blue-600"
+                                       {% if preferences and preferences.previous_therapy_experience %}checked{% endif %}>
+                                <span class="ml-2 text-sm text-gray-700">Yes, I've been to therapy before</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="previous_experience" value="no" class="border-gray-300 text-blue-600"
+                                       {% if preferences and not preferences.previous_therapy_experience %}checked{% endif %}>
+                                <span class="ml-2 text-sm text-gray-700">No, this is my first time</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="flex justify-end space-x-4">
+                <a href="{% url 'find-matches' %}" class="text-gray-600 border border-gray-300 px-6 py-3 rounded-md hover:bg-gray-50 transition duration-150">
+                    Skip for Now
+                </a>
+                <button type="submit" class="bg-blue-600 text-white px-8 py-3 rounded-md hover:bg-blue-700 transition duration-150">
+                    Find My Matches
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

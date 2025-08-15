@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MindBridge - Mental Wellness Platform{% endblock %}</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Alpine.js for interactivity -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Chart.js for analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom styles -->
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .mood-card {
+            transition: all 0.3s ease;
+        }
+        .mood-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+    
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50" x-data="{ mobileOpen: false }">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-heart text-white text-sm"></i>
+                        </div>
+                        <span class="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                            MindBridge
+                        </span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    {% if user.is_authenticated %}
+                        <a href="/dashboard/" class="text-gray-700 hover:text-blue-600 transition-colors">Dashboard</a>
+                        <a href="/wellness/" class="text-gray-700 hover:text-blue-600 transition-colors">Wellness</a>
+                        <a href="/appointments/find-matches/" class="text-gray-700 hover:text-blue-600 transition-colors">Find Therapist</a>
+                        <a href="/chat/" class="text-gray-700 hover:text-blue-600 transition-colors">Support</a>
+                        <a href="/appointments/" class="text-gray-700 hover:text-blue-600 transition-colors">Appointments</a>
+                        
+                        <!-- User Dropdown -->
+                        <div class="relative" x-data="{ open: false }">
+                            <button @click="open = !open" class="flex items-center space-x-2 text-gray-700 hover:text-blue-600">
+                                <img src="{{ user.profile_picture.url|default:'/static/default-avatar.png' }}" 
+                                     alt="Profile" class="w-8 h-8 rounded-full">
+                                <span>{{ user.first_name }}</span>
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </button>
+                            
+                            <div x-show="open" @click.away="open = false" 
+                                 class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2">
+                                <a href="/profile/" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profile</a>
+                                <a href="/settings/" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Settings</a>
+                                <hr class="my-2">
+                                <a href="/logout/" class="block px-4 py-2 text-red-600 hover:bg-gray-100">Logout</a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <a href="/login/" class="text-gray-700 hover:text-blue-600 transition-colors">Login</a>
+                        <a href="/register/" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                            Get Started
+                        </a>
+                    {% endif %}
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button @click="mobileOpen = !mobileOpen" class="text-gray-700">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div x-show="mobileOpen" class="md:hidden bg-white border-t">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                {% if user.is_authenticated %}
+                    <a href="/dashboard/" class="block px-3 py-2 text-gray-700">Dashboard</a>
+                    <a href="/wellness/" class="block px-3 py-2 text-gray-700">Wellness</a>
+                    <a href="/chat/" class="block px-3 py-2 text-gray-700">Support</a>
+                    <a href="/appointments/" class="block px-3 py-2 text-gray-700">Appointments</a>
+                    <a href="/logout/" class="block px-3 py-2 text-red-600">Logout</a>
+                {% else %}
+                    <a href="/login/" class="block px-3 py-2 text-gray-700">Login</a>
+                    <a href="/register/" class="block px-3 py-2 text-blue-600">Get Started</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Crisis Alert Banner -->
+    <div id="crisis-banner" class="hidden bg-red-600 text-white text-center py-2">
+        <p class="font-semibold">Need immediate help? 
+            <a href="tel:988" class="underline">Call 988 (Suicide & Crisis Lifeline)</a> or 
+            <button onclick="triggerCrisisAlert()" class="underline">Send Crisis Alert</button>
+        </p>
+    </div>
+    
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-heart text-white text-sm"></i>
+                        </div>
+                        <span class="text-xl font-bold">MindBridge</span>
+                    </div>
+                    <p class="text-gray-300">Connecting minds, building bridges to better mental health.</p>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold mb-4">Support</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="/help/" class="hover:text-white">Help Center</a></li>
+                        <li><a href="/crisis/" class="hover:text-white">Crisis Resources</a></li>
+                        <li><a href="/contact/" class="hover:text-white">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold mb-4">Resources</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="/wellness-library/" class="hover:text-white">Wellness Library</a></li>
+                        <li><a href="/blog/" class="hover:text-white">Blog</a></li>
+                        <li><a href="/therapists/" class="hover:text-white">Find Therapists</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold mb-4">Legal</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="/privacy/" class="hover:text-white">Privacy Policy</a></li>
+                        <li><a href="/terms/" class="hover:text-white">Terms of Service</a></li>
+                        <li><a href="/hipaa/" class="hover:text-white">HIPAA Compliance</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
+                <p>&copy; 2024 MindBridge. All rights reserved. Built with ❤️ for mental wellness.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Crisis Alert Modal -->
+    <div id="crisis-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg p-6 max-w-md w-full">
+            <h2 class="text-xl font-bold text-red-600 mb-4">Crisis Alert</h2>
+            <p class="mb-4">If you're having thoughts of self-harm or suicide, please reach out for help immediately:</p>
+            <div class="space-y-2 mb-4">
+                <p><strong>988:</strong> Suicide & Crisis Lifeline</p>
+                <p><strong>911:</strong> Emergency Services</p>
+                <p><strong>Text HOME to 741741:</strong> Crisis Text Line</p>
+            </div>
+            <div class="flex space-x-3">
+                <button onclick="closeCrisisModal()" class="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded">
+                    Close
+                </button>
+                <a href="tel:988" class="flex-1 bg-red-600 text-white py-2 px-4 rounded text-center">
+                    Call 988 Now
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function triggerCrisisAlert() {
+            document.getElementById('crisis-modal').classList.remove('hidden');
+        }
+        
+        function closeCrisisModal() {
+            document.getElementById('crisis-modal').classList.add('hidden');
+        }
+        
+        // Show crisis banner if user shows signs of distress
+        function showCrisisBanner() {
+            document.getElementById('crisis-banner').classList.remove('hidden');
+        }
+    </script>
+    
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

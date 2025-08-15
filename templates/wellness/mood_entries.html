@@ -1,0 +1,310 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Mood Tracking - MindBridge{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+    <!-- Header -->
+    <div class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="py-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-900">Mood Tracking</h1>
+                        <p class="mt-1 text-sm text-gray-500">Log and track your daily mood patterns</p>
+                    </div>
+                    <div class="flex space-x-3">
+                        <a href="{% url 'wellness-dashboard' %}" class="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition duration-150">
+                            Back to Wellness
+                        </a>
+                        <button id="addMoodBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition duration-150">
+                            Log Mood
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Mood Entry Form -->
+        <div id="moodForm" class="mb-8 bg-white shadow rounded-lg p-6 hidden">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">How are you feeling today?</h2>
+            <form>
+                {% csrf_token %}
+                <!-- Mood Rating -->
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Mood Rating (1-10)</label>
+                    <div class="flex space-x-2">
+                        {% for i in "1234567890" %}
+                        <button type="button" class="mood-btn w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center text-sm font-medium hover:border-indigo-500 transition-colors" data-rating="{{ forloop.counter }}">
+                            {{ forloop.counter }}
+                        </button>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Emotions -->
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Primary Emotions</label>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        {% for emotion in "happy,sad,anxious,calm,excited,frustrated,grateful,overwhelmed" %}
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="checkbox" name="emotions" value="{{ emotion }}" class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                            <span class="text-sm text-gray-700 capitalize">{{ emotion }}</span>
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Notes -->
+                <div class="mb-6">
+                    <label for="notes" class="block text-sm font-medium text-gray-700 mb-2">Notes (Optional)</label>
+                    <textarea id="notes" name="notes" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="What's affecting your mood today?"></textarea>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex space-x-3">
+                    <button type="submit" class="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition duration-150">
+                        Save Entry
+                    </button>
+                    <button type="button" id="cancelMoodBtn" class="bg-gray-300 text-gray-700 px-6 py-2 rounded-md hover:bg-gray-400 transition duration-150">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Mood History -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Chart Section -->
+            <div class="lg:col-span-2">
+                <div class="bg-white shadow rounded-lg p-6">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">Mood Trends (Last 30 Days)</h2>
+                    <canvas id="moodTrendChart" width="400" height="200"></canvas>
+                </div>
+
+                <!-- Recent Entries -->
+                <div class="mt-8 bg-white shadow rounded-lg">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h2 class="text-xl font-semibold text-gray-900">Recent Entries</h2>
+                    </div>
+                    <div class="divide-y divide-gray-200">
+                        <!-- Sample entries -->
+                        <div class="px-6 py-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                                            <span class="text-lg font-semibold text-green-600">8</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900">Today</p>
+                                        <p class="text-sm text-gray-500">Happy, Grateful</p>
+                                        <p class="text-xs text-gray-400 mt-1">Had a great session with my therapist today...</p>
+                                    </div>
+                                </div>
+                                <div class="text-sm text-gray-500">2 hours ago</div>
+                            </div>
+                        </div>
+
+                        <div class="px-6 py-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center">
+                                            <span class="text-lg font-semibold text-yellow-600">6</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900">Yesterday</p>
+                                        <p class="text-sm text-gray-500">Anxious, Overwhelmed</p>
+                                        <p class="text-xs text-gray-400 mt-1">Work was stressful, but I managed to practice...</p>
+                                    </div>
+                                </div>
+                                <div class="text-sm text-gray-500">1 day ago</div>
+                            </div>
+                        </div>
+
+                        <div class="px-6 py-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                                            <span class="text-lg font-semibold text-blue-600">7</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900">2 days ago</p>
+                                        <p class="text-sm text-gray-500">Calm, Excited</p>
+                                        <p class="text-xs text-gray-400 mt-1">Started a new book and went for a long walk...</p>
+                                    </div>
+                                </div>
+                                <div class="text-sm text-gray-500">2 days ago</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4 bg-gray-50">
+                        <button class="w-full text-center text-sm text-indigo-600 hover:text-indigo-800 font-medium">
+                            View All Entries
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div>
+                <!-- Mood Summary -->
+                <div class="bg-white shadow rounded-lg p-6 mb-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">This Week</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="text-sm text-gray-500">Average Mood</span>
+                                <span class="text-sm font-medium text-gray-900">7.2/10</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-green-600 h-2 rounded-full" style="width: 72%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="text-sm text-gray-500">Best Day</span>
+                                <span class="text-sm font-medium text-gray-900">Friday (9/10)</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="text-sm text-gray-500">Entries This Week</span>
+                                <span class="text-sm font-medium text-gray-900">5/7</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mood Insights -->
+                <div class="bg-white shadow rounded-lg p-6 mb-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Insights</h3>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-blue-50 rounded-lg">
+                            <div class="flex items-start">
+                                <svg class="h-5 w-5 text-blue-400 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                                </svg>
+                                <div class="ml-3">
+                                    <p class="text-sm text-blue-800">Your mood tends to improve on weekends.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-3 bg-green-50 rounded-lg">
+                            <div class="flex items-start">
+                                <svg class="h-5 w-5 text-green-400 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <div class="ml-3">
+                                    <p class="text-sm text-green-800">Great progress! You've logged mood 5 days this week.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Tips -->
+                <div class="bg-white shadow rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Tips for Today</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start space-x-3">
+                            <div class="flex-shrink-0">
+                                <div class="w-6 h-6 bg-indigo-100 rounded-full flex items-center justify-center">
+                                    <span class="text-xs font-medium text-indigo-600">1</span>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-700">Take 5 minutes for deep breathing</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="flex-shrink-0">
+                                <div class="w-6 h-6 bg-indigo-100 rounded-full flex items-center justify-center">
+                                    <span class="text-xs font-medium text-indigo-600">2</span>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-700">Write down three things you're grateful for</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="flex-shrink-0">
+                                <div class="w-6 h-6 bg-indigo-100 rounded-full flex items-center justify-center">
+                                    <span class="text-xs font-medium text-indigo-600">3</span>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-700">Go for a 10-minute walk outside</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Mood form toggle
+document.getElementById('addMoodBtn').addEventListener('click', function() {
+    document.getElementById('moodForm').classList.remove('hidden');
+});
+
+document.getElementById('cancelMoodBtn').addEventListener('click', function() {
+    document.getElementById('moodForm').classList.add('hidden');
+});
+
+// Mood rating buttons
+document.querySelectorAll('.mood-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        // Remove active state from all buttons
+        document.querySelectorAll('.mood-btn').forEach(b => {
+            b.classList.remove('bg-indigo-500', 'text-white', 'border-indigo-500');
+            b.classList.add('border-gray-300');
+        });
+        
+        // Add active state to clicked button
+        this.classList.remove('border-gray-300');
+        this.classList.add('bg-indigo-500', 'text-white', 'border-indigo-500');
+    });
+});
+
+// Mood trend chart
+const ctx = document.getElementById('moodTrendChart').getContext('2d');
+const chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+        datasets: [{
+            label: 'Average Mood',
+            data: [6.2, 6.8, 7.1, 7.2],
+            borderColor: 'rgb(99, 102, 241)',
+            backgroundColor: 'rgba(99, 102, 241, 0.1)',
+            tension: 0.1,
+            fill: true
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true,
+                max: 10,
+                title: {
+                    display: true,
+                    text: 'Mood Rating'
+                }
+            }
+        },
+        plugins: {
+            legend: {
+                display: false
+            }
+        }
+    }
+});
+</script>
+{% endblock %}

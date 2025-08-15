@@ -1,0 +1,284 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Crisis Support - MindBridge{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-red-50">
+    <!-- Emergency Header -->
+    <div class="bg-red-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="py-6">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <svg class="h-8 w-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                        </svg>
+                        <div>
+                            <h1 class="text-3xl font-bold">Crisis Support</h1>
+                            <p class="text-red-100">Immediate help is available 24/7</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-2xl font-bold">988</div>
+                        <div class="text-sm">Suicide & Crisis Lifeline</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Immediate Help Section -->
+        <div class="mb-8">
+            <div class="bg-white border-l-4 border-red-500 shadow-lg rounded-lg p-6">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <svg class="h-6 w-6 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-3 flex-1">
+                        <h3 class="text-lg font-semibold text-gray-900">Need Help Right Now?</h3>
+                        <p class="mt-2 text-sm text-gray-700">
+                            If you're having thoughts of suicide or self-harm, please reach out immediately. You're not alone, and help is available.
+                        </p>
+                        <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <a href="tel:988" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 transition duration-150">
+                                <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+                                </svg>
+                                Call 988 Now
+                            </a>
+                            <a href="sms:741741" class="inline-flex items-center justify-center px-6 py-3 border border-red-600 text-base font-medium rounded-md text-red-600 bg-white hover:bg-red-50 transition duration-150">
+                                <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                                </svg>
+                                Text HOME to 741741
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Crisis Resources Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <!-- National Suicide Prevention Lifeline -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                        <svg class="h-6 w-6 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="ml-3 text-lg font-semibold text-gray-900">988 Lifeline</h3>
+                </div>
+                <p class="text-gray-600 text-sm mb-4">24/7, free and confidential support for people in distress, prevention and crisis resources.</p>
+                <div class="space-y-2">
+                    <a href="tel:988" class="block w-full bg-red-600 text-white text-center py-2 px-4 rounded-md hover:bg-red-700 transition duration-150">
+                        Call 988
+                    </a>
+                    <a href="https://suicidepreventionlifeline.org/chat/" target="_blank" class="block w-full bg-red-100 text-red-700 text-center py-2 px-4 rounded-md hover:bg-red-200 transition duration-150">
+                        Online Chat
+                    </a>
+                </div>
+            </div>
+
+            <!-- Crisis Text Line -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                        <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="ml-3 text-lg font-semibold text-gray-900">Crisis Text Line</h3>
+                </div>
+                <p class="text-gray-600 text-sm mb-4">Free, 24/7 crisis support via text message. Connect with a trained crisis counselor.</p>
+                <div class="space-y-2">
+                    <a href="sms:741741" class="block w-full bg-blue-600 text-white text-center py-2 px-4 rounded-md hover:bg-blue-700 transition duration-150">
+                        Text HOME to 741741
+                    </a>
+                    <div class="text-xs text-gray-500 text-center">Standard messaging rates apply</div>
+                </div>
+            </div>
+
+            <!-- Emergency Services -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+                        <svg class="h-6 w-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16c-.77.833.192 2.5 1.732 2.5z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="ml-3 text-lg font-semibold text-gray-900">Emergency Services</h3>
+                </div>
+                <p class="text-gray-600 text-sm mb-4">For immediate physical danger or medical emergencies requiring immediate response.</p>
+                <div class="space-y-2">
+                    <a href="tel:911" class="block w-full bg-yellow-600 text-white text-center py-2 px-4 rounded-md hover:bg-yellow-700 transition duration-150">
+                        Call 911
+                    </a>
+                    <div class="text-xs text-gray-500 text-center">For life-threatening emergencies only</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Resources -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <!-- Immediate Coping Strategies -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">Immediate Coping Strategies</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start space-x-3">
+                        <div class="flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mt-1">
+                            <span class="text-xs font-medium text-green-600">1</span>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-900">Ground Yourself</h4>
+                            <p class="text-sm text-gray-600">Use the 5-4-3-2-1 technique: name 5 things you see, 4 you can touch, 3 you hear, 2 you smell, 1 you taste.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mt-1">
+                            <span class="text-xs font-medium text-green-600">2</span>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-900">Breathing Exercise</h4>
+                            <p class="text-sm text-gray-600">Breathe in for 4 counts, hold for 4, breathe out for 6. Repeat until you feel calmer.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mt-1">
+                            <span class="text-xs font-medium text-green-600">3</span>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-900">Reach Out</h4>
+                            <p class="text-sm text-gray-600">Call a trusted friend, family member, or use one of the crisis resources above.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mt-1">
+                            <span class="text-xs font-medium text-green-600">4</span>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-900">Remove Means</h4>
+                            <p class="text-sm text-gray-600">If you're having thoughts of self-harm, remove or secure any means and ask someone to stay with you.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Warning Signs -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">When to Seek Help</h3>
+                <div class="space-y-3">
+                    <div class="flex items-start space-x-3">
+                        <svg class="h-5 w-5 text-red-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-sm text-gray-700">Thoughts of suicide or self-harm</span>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <svg class="h-5 w-5 text-red-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-sm text-gray-700">Feeling hopeless or trapped</span>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <svg class="h-5 w-5 text-red-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-sm text-gray-700">Extreme mood changes</span>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <svg class="h-5 w-5 text-red-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-sm text-gray-700">Substance abuse as coping mechanism</span>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <svg class="h-5 w-5 text-red-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-sm text-gray-700">Withdrawing from friends and activities</span>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <svg class="h-5 w-5 text-red-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-sm text-gray-700">Giving away personal possessions</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Specialized Crisis Lines -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-6">Specialized Crisis Support</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="font-medium text-gray-900 mb-2">LGBTQ+ Crisis Support</h4>
+                    <p class="text-sm text-gray-600 mb-3">The Trevor Project provides crisis intervention and suicide prevention for LGBTQ+ youth.</p>
+                    <a href="tel:1-866-488-7386" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">1-866-488-7386</a>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Veterans Crisis Line</h4>
+                    <p class="text-sm text-gray-600 mb-3">24/7 confidential support for veterans and their families.</p>
+                    <a href="tel:1-800-273-8255" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">1-800-273-8255 (Press 1)</a>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Domestic Violence Hotline</h4>
+                    <p class="text-sm text-gray-600 mb-3">24/7 support for those experiencing domestic violence.</p>
+                    <a href="tel:1-800-799-7233" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">1-800-799-7233</a>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Substance Abuse Helpline</h4>
+                    <p class="text-sm text-gray-600 mb-3">24/7 treatment referral and information service.</p>
+                    <a href="tel:1-800-662-4357" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">1-800-662-4357</a>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Sexual Assault Hotline</h4>
+                    <p class="text-sm text-gray-600 mb-3">24/7 confidential support for survivors of sexual violence.</p>
+                    <a href="tel:1-800-656-4673" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">1-800-656-4673</a>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Eating Disorders Helpline</h4>
+                    <p class="text-sm text-gray-600 mb-3">Support and resources for eating disorder recovery.</p>
+                    <a href="tel:1-800-931-2237" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">1-800-931-2237</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Safety Planning -->
+        <div class="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-blue-900 mb-4">Create a Safety Plan</h3>
+            <p class="text-blue-800 mb-4">A safety plan is a personalized, practical plan that can help you lower your risk of future suicidal behavior.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <h4 class="font-medium text-blue-900 mb-2">Include:</h4>
+                    <ul class="text-sm text-blue-800 space-y-1">
+                        <li>• Warning signs that a crisis may be developing</li>
+                        <li>• Coping strategies you can use on your own</li>
+                        <li>• People and social settings that provide distraction</li>
+                        <li>• People you can ask for help</li>
+                        <li>• Professional agencies and clinicians to contact</li>
+                        <li>• Ways to make your environment safe</li>
+                    </ul>
+                </div>
+                <div>
+                    <button class="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 transition duration-150">
+                        Start Safety Plan Template
+                    </button>
+                    <p class="text-xs text-blue-700 mt-2 text-center">Download our guided safety plan worksheet</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

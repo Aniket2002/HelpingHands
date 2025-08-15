@@ -1,0 +1,241 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Community - MindBridge{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+    <div class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="py-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-900">Community</h1>
+                        <p class="mt-1 text-sm text-gray-500">Connect with others on their mental health journey</p>
+                    </div>
+                    <a href="{% url 'support-groups' %}" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition duration-150">
+                        Join Support Groups
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-lg shadow">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-500">Active Groups</p>
+                        <p class="text-2xl font-semibold text-gray-900">24</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white p-6 rounded-lg shadow">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-500">Members</p>
+                        <p class="text-2xl font-semibold text-gray-900">1,247</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white p-6 rounded-lg shadow">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-500">Daily Posts</p>
+                        <p class="text-2xl font-semibold text-gray-900">156</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2 space-y-6">
+                <div class="bg-white shadow rounded-lg">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h2 class="text-xl font-semibold text-gray-900">Popular Support Groups</h2>
+                    </div>
+                    <div class="divide-y divide-gray-200">
+                        <div class="px-6 py-4 hover:bg-gray-50">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="text-lg font-medium text-gray-900">Anxiety Support Circle</h3>
+                                    <p class="text-sm text-gray-500">Share experiences and coping strategies for anxiety management</p>
+                                    <div class="mt-2 flex items-center space-x-4 text-xs text-gray-400">
+                                        <span>234 members</span>
+                                        <span>•</span>
+                                        <span>12 posts today</span>
+                                        <span>•</span>
+                                        <span>Moderated</span>
+                                    </div>
+                                </div>
+                                <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-150">
+                                    Join
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="px-6 py-4 hover:bg-gray-50">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="text-lg font-medium text-gray-900">Depression Recovery Group</h3>
+                                    <p class="text-sm text-gray-500">A safe space for those dealing with depression</p>
+                                    <div class="mt-2 flex items-center space-x-4 text-xs text-gray-400">
+                                        <span>189 members</span>
+                                        <span>•</span>
+                                        <span>8 posts today</span>
+                                        <span>•</span>
+                                        <span>Professional Support</span>
+                                    </div>
+                                </div>
+                                <button class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition duration-150">
+                                    Join
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="px-6 py-4 hover:bg-gray-50">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="text-lg font-medium text-gray-900">PTSD Warriors</h3>
+                                    <p class="text-sm text-gray-500">Support and healing for trauma survivors</p>
+                                    <div class="mt-2 flex items-center space-x-4 text-xs text-gray-400">
+                                        <span>156 members</span>
+                                        <span>•</span>
+                                        <span>5 posts today</span>
+                                        <span>•</span>
+                                        <span>Therapist Led</span>
+                                    </div>
+                                </div>
+                                <button class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition duration-150">
+                                    Join
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white shadow rounded-lg">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h2 class="text-xl font-semibold text-gray-900">Recent Community Posts</h2>
+                    </div>
+                    <div class="divide-y divide-gray-200">
+                        <div class="px-6 py-4">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <span class="text-blue-600 font-semibold text-sm">JD</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center space-x-2">
+                                        <h4 class="text-sm font-medium text-gray-900">Jane D.</h4>
+                                        <span class="text-xs text-gray-500">in Anxiety Support Circle</span>
+                                        <span class="text-xs text-gray-400">•</span>
+                                        <span class="text-xs text-gray-400">2 hours ago</span>
+                                    </div>
+                                    <p class="mt-1 text-sm text-gray-700">
+                                        Today I tried the breathing technique we discussed and it really helped during my presentation at work. Thank you all for the support! 💙
+                                    </p>
+                                    <div class="mt-2 flex items-center space-x-4 text-xs text-gray-500">
+                                        <button class="hover:text-blue-600">👍 12 likes</button>
+                                        <button class="hover:text-blue-600">💬 3 replies</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="px-6 py-4">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                                    <span class="text-green-600 font-semibold text-sm">MR</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center space-x-2">
+                                        <h4 class="text-sm font-medium text-gray-900">Mike R.</h4>
+                                        <span class="text-xs text-gray-500">in Depression Recovery Group</span>
+                                        <span class="text-xs text-gray-400">•</span>
+                                        <span class="text-xs text-gray-400">4 hours ago</span>
+                                    </div>
+                                    <p class="mt-1 text-sm text-gray-700">
+                                        Six months ago I couldn't get out of bed. Today I went for a 30-minute walk. Small steps, but they're still steps forward. 🌱
+                                    </p>
+                                    <div class="mt-2 flex items-center space-x-4 text-xs text-gray-500">
+                                        <button class="hover:text-green-600">👍 24 likes</button>
+                                        <button class="hover:text-green-600">💬 8 replies</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="space-y-6">
+                <div class="bg-white shadow rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Upcoming Events</h3>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <h4 class="font-medium text-gray-900">Mindfulness Workshop</h4>
+                            <p class="text-sm text-gray-500">Tomorrow at 7:00 PM</p>
+                        </div>
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <h4 class="font-medium text-gray-900">Group Therapy Session</h4>
+                            <p class="text-sm text-gray-500">Friday at 6:00 PM</p>
+                        </div>
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <h4 class="font-medium text-gray-900">Trauma Recovery Circle</h4>
+                            <p class="text-sm text-gray-500">Saturday at 3:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white shadow rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Community Guidelines</h3>
+                    <div class="space-y-3 text-sm text-gray-600">
+                        <div class="flex items-start space-x-2">
+                            <svg class="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Be respectful and supportive</span>
+                        </div>
+                        <div class="flex items-start space-x-2">
+                            <svg class="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Maintain confidentiality</span>
+                        </div>
+                        <div class="flex items-start space-x-2">
+                            <svg class="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Report concerning behavior</span>
+                        </div>
+                        <div class="flex items-start space-x-2">
+                            <svg class="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Use crisis resources when needed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

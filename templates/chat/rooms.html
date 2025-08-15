@@ -1,0 +1,359 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Chat Rooms - MindBridge{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+    <!-- Header -->
+    <div class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="py-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-900">Support Chat</h1>
+                        <p class="mt-1 text-sm text-gray-500">Connect with peers and mental health professionals</p>
+                    </div>
+                    <div class="flex space-x-3">
+                        <a href="{% url 'crisis-support' %}" class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition duration-150">
+                            Crisis Support
+                        </a>
+                        <button id="createRoomBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition duration-150">
+                            Create Room
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Crisis Alert Banner -->
+        <div class="mb-8 bg-red-50 border border-red-200 rounded-lg p-4">
+            <div class="flex items-start">
+                <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-sm font-medium text-red-800">
+                        Need immediate help?
+                    </h3>
+                    <div class="mt-2 text-sm text-red-700">
+                        <p>
+                            If you're experiencing a mental health crisis, please contact emergency services or call the National Suicide Prevention Lifeline at 988.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Room Types -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                <div class="flex items-center mb-4">
+                    <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                        <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="ml-3 text-lg font-semibold text-gray-900">Peer Support</h3>
+                </div>
+                <p class="text-gray-600 text-sm mb-4">Connect with others who understand your experiences and share coping strategies.</p>
+                <div class="text-sm text-gray-500">
+                    <span class="inline-flex items-center">
+                        <span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
+                        5 active rooms
+                    </span>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                <div class="flex items-center mb-4">
+                    <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                        <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="ml-3 text-lg font-semibold text-gray-900">Moderated</h3>
+                </div>
+                <p class="text-gray-600 text-sm mb-4">Professionally moderated discussions with trained mental health advocates.</p>
+                <div class="text-sm text-gray-500">
+                    <span class="inline-flex items-center">
+                        <span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
+                        3 active rooms
+                    </span>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                <div class="flex items-center mb-4">
+                    <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                        <svg class="h-6 w-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="ml-3 text-lg font-semibold text-gray-900">Private</h3>
+                </div>
+                <p class="text-gray-600 text-sm mb-4">One-on-one support sessions with licensed therapists and counselors.</p>
+                <div class="text-sm text-gray-500">
+                    <span class="inline-flex items-center">
+                        <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span>
+                        Schedule available
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Active Chat Rooms -->
+        <div class="bg-white shadow rounded-lg">
+            <div class="px-6 py-4 border-b border-gray-200">
+                <h2 class="text-xl font-semibold text-gray-900">Active Chat Rooms</h2>
+            </div>
+            <div class="divide-y divide-gray-200">
+                <!-- Room 1 -->
+                <div class="px-6 py-4 hover:bg-gray-50 transition duration-150">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                    <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-medium text-gray-900">Anxiety Support Circle</h3>
+                                <p class="text-sm text-gray-500">Share your experiences with anxiety and coping strategies</p>
+                                <div class="mt-1 flex items-center space-x-4 text-xs text-gray-400">
+                                    <span>12 participants</span>
+                                    <span>•</span>
+                                    <span>Active now</span>
+                                    <span>•</span>
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
+                                        Peer Support
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-shrink-0">
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700 transition duration-150">
+                                Join Room
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Room 2 -->
+                <div class="px-6 py-4 hover:bg-gray-50 transition duration-150">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                    <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-medium text-gray-900">Depression Recovery Group</h3>
+                                <p class="text-sm text-gray-500">Moderated support for those dealing with depression</p>
+                                <div class="mt-1 flex items-center space-x-4 text-xs text-gray-400">
+                                    <span>8 participants</span>
+                                    <span>•</span>
+                                    <span>Moderator online</span>
+                                    <span>•</span>
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
+                                        Moderated
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-shrink-0">
+                            <button class="bg-green-600 text-white px-4 py-2 rounded-md text-sm hover:bg-green-700 transition duration-150">
+                                Join Room
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Room 3 -->
+                <div class="px-6 py-4 hover:bg-gray-50 transition duration-150">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                                    <svg class="h-6 w-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-medium text-gray-900">Mindfulness & Meditation</h3>
+                                <p class="text-sm text-gray-500">Daily guided meditation sessions and mindfulness practice</p>
+                                <div class="mt-1 flex items-center space-x-4 text-xs text-gray-400">
+                                    <span>15 participants</span>
+                                    <span>•</span>
+                                    <span>Session starting soon</span>
+                                    <span>•</span>
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-purple-100 text-purple-800">
+                                        Guided Session
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-shrink-0">
+                            <button class="bg-purple-600 text-white px-4 py-2 rounded-md text-sm hover:bg-purple-700 transition duration-150">
+                                Join Room
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Room 4 -->
+                <div class="px-6 py-4 hover:bg-gray-50 transition duration-150">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+                                    <svg class="h-6 w-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 12v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-medium text-gray-900">PTSD Support Network</h3>
+                                <p class="text-sm text-gray-500">Safe space for trauma survivors with professional moderation</p>
+                                <div class="mt-1 flex items-center space-x-4 text-xs text-gray-400">
+                                    <span>6 participants</span>
+                                    <span>•</span>
+                                    <span>Therapist present</span>
+                                    <span>•</span>
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800">
+                                        Professional
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-shrink-0">
+                            <button class="bg-yellow-600 text-white px-4 py-2 rounded-md text-sm hover:bg-yellow-700 transition duration-150">
+                                Join Room
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Community Guidelines -->
+        <div class="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-blue-900 mb-4">Community Guidelines</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-blue-800">
+                <ul class="space-y-2">
+                    <li class="flex items-start">
+                        <svg class="h-4 w-4 text-blue-600 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        Be respectful and supportive to all members
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="h-4 w-4 text-blue-600 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        No sharing of personal contact information
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="h-4 w-4 text-blue-600 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        Report concerning behavior to moderators
+                    </li>
+                </ul>
+                <ul class="space-y-2">
+                    <li class="flex items-start">
+                        <svg class="h-4 w-4 text-blue-600 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        Keep conversations focused on mental health support
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="h-4 w-4 text-blue-600 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        Use crisis resources for immediate help
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="h-4 w-4 text-blue-600 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        Maintain confidentiality of shared experiences
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Create Room Modal (Hidden by default) -->
+<div id="createRoomModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
+        <div class="px-6 py-4 border-b border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900">Create New Chat Room</h3>
+        </div>
+        <div class="px-6 py-4">
+            <form>
+                <div class="mb-4">
+                    <label for="roomName" class="block text-sm font-medium text-gray-700 mb-2">Room Name</label>
+                    <input type="text" id="roomName" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="e.g., Study Buddy Support">
+                </div>
+                <div class="mb-4">
+                    <label for="roomDescription" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                    <textarea id="roomDescription" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Brief description of the room's purpose..."></textarea>
+                </div>
+                <div class="mb-4">
+                    <label for="roomType" class="block text-sm font-medium text-gray-700 mb-2">Room Type</label>
+                    <select id="roomType" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <option value="peer">Peer Support</option>
+                        <option value="moderated">Moderated</option>
+                        <option value="private">Private</option>
+                    </select>
+                </div>
+                <div class="flex space-x-3">
+                    <button type="submit" class="flex-1 bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition duration-150">
+                        Create Room
+                    </button>
+                    <button type="button" id="cancelCreateRoom" class="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-400 transition duration-150">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+// Create room modal functionality
+const createRoomBtn = document.getElementById('createRoomBtn');
+const createRoomModal = document.getElementById('createRoomModal');
+const cancelCreateRoom = document.getElementById('cancelCreateRoom');
+
+createRoomBtn.addEventListener('click', function() {
+    createRoomModal.classList.remove('hidden');
+    createRoomModal.classList.add('flex');
+});
+
+cancelCreateRoom.addEventListener('click', function() {
+    createRoomModal.classList.add('hidden');
+    createRoomModal.classList.remove('flex');
+});
+
+// Close modal when clicking outside
+createRoomModal.addEventListener('click', function(e) {
+    if (e.target === createRoomModal) {
+        createRoomModal.classList.add('hidden');
+        createRoomModal.classList.remove('flex');
+    }
+});
+</script>
+{% endblock %}

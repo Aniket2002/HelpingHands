@@ -1,0 +1,336 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - MindBridge{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" x-data="dashboard()">
+    <!-- Welcome Header -->
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900">
+            Welcome back, {{ user.first_name }}! 👋
+        </h1>
+        <p class="text-gray-600 mt-2">Here's your mental wellness overview for today.</p>
+    </div>
+    
+    <!-- Quick Actions -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <button @click="openMoodModal()" class="bg-blue-500 hover:bg-blue-600 text-white p-6 rounded-lg transition-colors text-left">
+            <i class="fas fa-smile text-2xl mb-2"></i>
+            <h3 class="font-semibold">Log Mood</h3>
+            <p class="text-sm opacity-90">How are you feeling today?</p>
+        </button>
+        
+        <a href="/chat/" class="bg-green-500 hover:bg-green-600 text-white p-6 rounded-lg transition-colors text-left block">
+            <i class="fas fa-comments text-2xl mb-2"></i>
+            <h3 class="font-semibold">Join Support</h3>
+            <p class="text-sm opacity-90">Connect with community</p>
+        </a>
+        
+        <a href="/appointments/" class="bg-purple-500 hover:bg-purple-600 text-white p-6 rounded-lg transition-colors text-left block">
+            <i class="fas fa-calendar text-2xl mb-2"></i>
+            <h3 class="font-semibold">Book Session</h3>
+            <p class="text-sm opacity-90">Schedule with therapist</p>
+        </a>
+        
+        <button @click="showCrisisBanner()" class="bg-red-500 hover:bg-red-600 text-white p-6 rounded-lg transition-colors text-left">
+            <i class="fas fa-exclamation-triangle text-2xl mb-2"></i>
+            <h3 class="font-semibold">Need Help?</h3>
+            <p class="text-sm opacity-90">Crisis support available</p>
+        </button>
+    </div>
+    
+    <!-- Main Dashboard Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Left Column - Mood & Progress -->
+        <div class="lg:col-span-2 space-y-8">
+            <!-- Mood Tracking Card -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-xl font-semibold">Mood Tracking</h2>
+                    <button @click="openMoodModal()" class="text-blue-600 hover:text-blue-800">
+                        <i class="fas fa-plus"></i> Add Entry
+                    </button>
+                </div>
+                
+                <!-- Mood Chart -->
+                <div class="h-64 mb-4">
+                    <canvas id="moodChart"></canvas>
+                </div>
+                
+                <!-- Recent Mood Entries -->
+                <div class="space-y-3">
+                    <h3 class="font-medium text-gray-700">Recent Entries</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                            <div class="flex items-center">
+                                <span class="text-2xl mr-3">😊</span>
+                                <div>
+                                    <div class="font-medium">Good</div>
+                                    <div class="text-sm text-gray-500">Today, 2:30 PM</div>
+                                </div>
+                            </div>
+                            <div class="text-sm text-gray-400">Feeling optimistic</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                            <div class="flex items-center">
+                                <span class="text-2xl mr-3">😐</span>
+                                <div>
+                                    <div class="font-medium">Fair</div>
+                                    <div class="text-sm text-gray-500">Yesterday</div>
+                                </div>
+                            </div>
+                            <div class="text-sm text-gray-400">Neutral day</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Wellness Goals -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-xl font-semibold">Wellness Goals</h2>
+                    <button class="text-blue-600 hover:text-blue-800">
+                        <i class="fas fa-plus"></i> Add Goal
+                    </button>
+                </div>
+                
+                <div class="space-y-4">
+                    <!-- Goal 1 -->
+                    <div class="border rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-medium">Daily Meditation</h3>
+                            <span class="text-sm text-gray-500">7/10 days</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                            <div class="bg-green-600 h-2 rounded-full" style="width: 70%"></div>
+                        </div>
+                        <p class="text-sm text-gray-600">Target: 10 minutes daily</p>
+                    </div>
+                    
+                    <!-- Goal 2 -->
+                    <div class="border rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-medium">Exercise Routine</h3>
+                            <span class="text-sm text-gray-500">3/5 sessions</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                            <div class="bg-blue-600 h-2 rounded-full" style="width: 60%"></div>
+                        </div>
+                        <p class="text-sm text-gray-600">Target: 5 sessions this week</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Column - Upcoming & Resources -->
+        <div class="space-y-8">
+            <!-- Upcoming Appointments -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-xl font-semibold mb-6">Upcoming Sessions</h2>
+                
+                <div class="space-y-4">
+                    <div class="border-l-4 border-blue-500 pl-4 py-2">
+                        <div class="font-medium">Dr. Sarah Johnson</div>
+                        <div class="text-sm text-gray-600">Tomorrow, 3:00 PM</div>
+                        <div class="text-sm text-blue-600">Video Session</div>
+                    </div>
+                    
+                    <div class="border-l-4 border-green-500 pl-4 py-2">
+                        <div class="font-medium">Support Group: Anxiety</div>
+                        <div class="text-sm text-gray-600">Friday, 7:00 PM</div>
+                        <div class="text-sm text-green-600">Group Chat</div>
+                    </div>
+                </div>
+                
+                <a href="/appointments/" class="block mt-4 text-center bg-gray-100 hover:bg-gray-200 py-2 rounded transition-colors">
+                    View All Appointments
+                </a>
+            </div>
+            
+            <!-- Daily Wellness -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-xl font-semibold mb-6">Daily Wellness</h2>
+                
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+                        <div class="flex items-center">
+                            <i class="fas fa-om text-blue-600 mr-3"></i>
+                            <span>Morning Meditation</span>
+                        </div>
+                        <button class="text-blue-600 hover:text-blue-800">Start</button>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                        <div class="flex items-center">
+                            <i class="fas fa-running text-green-600 mr-3"></i>
+                            <span>Breathing Exercise</span>
+                        </div>
+                        <button class="text-green-600 hover:text-green-800">Start</button>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-3 bg-purple-50 rounded-lg">
+                        <div class="flex items-center">
+                            <i class="fas fa-book text-purple-600 mr-3"></i>
+                            <span>Journal Entry</span>
+                        </div>
+                        <button class="text-purple-600 hover:text-purple-800">Write</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mental Health Tips -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-xl font-semibold mb-6">Today's Tip</h2>
+                
+                <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-4 rounded-lg">
+                    <h3 class="font-semibold mb-2">Practice Gratitude</h3>
+                    <p class="text-sm">Take a moment to write down three things you're grateful for today. Gratitude practice can improve mood and overall well-being.</p>
+                </div>
+                
+                <a href="/wellness-library/" class="block mt-4 text-center text-blue-600 hover:text-blue-800">
+                    Explore More Resources →
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Mood Logging Modal -->
+    <div x-show="showMoodModal" x-cloak class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg p-6 max-w-md w-full">
+            <h2 class="text-xl font-bold mb-4">How are you feeling today?</h2>
+            
+            <div class="grid grid-cols-5 gap-3 mb-6">
+                <button @click="selectedMood = 1" 
+                        :class="selectedMood === 1 ? 'ring-4 ring-red-300' : ''"
+                        class="text-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                    <div class="text-3xl mb-1">😢</div>
+                    <div class="text-xs">Very Poor</div>
+                </button>
+                
+                <button @click="selectedMood = 2" 
+                        :class="selectedMood === 2 ? 'ring-4 ring-orange-300' : ''"
+                        class="text-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                    <div class="text-3xl mb-1">😟</div>
+                    <div class="text-xs">Poor</div>
+                </button>
+                
+                <button @click="selectedMood = 3" 
+                        :class="selectedMood === 3 ? 'ring-4 ring-yellow-300' : ''"
+                        class="text-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                    <div class="text-3xl mb-1">😐</div>
+                    <div class="text-xs">Fair</div>
+                </button>
+                
+                <button @click="selectedMood = 4" 
+                        :class="selectedMood === 4 ? 'ring-4 ring-blue-300' : ''"
+                        class="text-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                    <div class="text-3xl mb-1">😊</div>
+                    <div class="text-xs">Good</div>
+                </button>
+                
+                <button @click="selectedMood = 5" 
+                        :class="selectedMood === 5 ? 'ring-4 ring-green-300' : ''"
+                        class="text-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                    <div class="text-3xl mb-1">😄</div>
+                    <div class="text-xs">Excellent</div>
+                </button>
+            </div>
+            
+            <textarea x-model="moodNotes" 
+                      placeholder="Add any notes about your mood (optional)..."
+                      class="w-full p-3 border rounded-lg mb-4 resize-none"
+                      rows="3"></textarea>
+            
+            <div class="flex space-x-3">
+                <button @click="showMoodModal = false" 
+                        class="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded">
+                    Cancel
+                </button>
+                <button @click="saveMood()" 
+                        class="flex-1 bg-blue-600 text-white py-2 px-4 rounded">
+                    Save Mood
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function dashboard() {
+    return {
+        showMoodModal: false,
+        selectedMood: null,
+        moodNotes: '',
+        
+        openMoodModal() {
+            this.showMoodModal = true;
+            this.selectedMood = null;
+            this.moodNotes = '';
+        },
+        
+        saveMood() {
+            if (!this.selectedMood) {
+                alert('Please select a mood first');
+                return;
+            }
+            
+            // Here you would typically send the data to your backend
+            console.log('Saving mood:', this.selectedMood, this.moodNotes);
+            
+            // Simulate API call
+            setTimeout(() => {
+                this.showMoodModal = false;
+                alert('Mood logged successfully!');
+            }, 500);
+        }
+    }
+}
+
+// Initialize mood chart when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    const ctx = document.getElementById('moodChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+                label: 'Mood Level',
+                data: [3, 4, 3, 5, 4, 3, 4],
+                borderColor: 'rgb(59, 130, 246)',
+                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                tension: 0.4,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 5,
+                    ticks: {
+                        stepSize: 1,
+                        callback: function(value) {
+                            const moods = ['', 'Very Poor', 'Poor', 'Fair', 'Good', 'Excellent'];
+                            return moods[value];
+                        }
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+});
+</script>
+
+<style>
+[x-cloak] { display: none !important; }
+</style>
+{% endblock %}
+{% endblock %}

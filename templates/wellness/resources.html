@@ -1,0 +1,362 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Wellness Resources - MindBridge{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+    <!-- Header -->
+    <div class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="py-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-900">Wellness Resources</h1>
+                        <p class="mt-1 text-sm text-gray-500">Discover tools, articles, and exercises for your mental health journey</p>
+                    </div>
+                    <div class="flex space-x-3">
+                        <a href="{% url 'wellness-dashboard' %}" class="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition duration-150">
+                            Back to Wellness
+                        </a>
+                        <div class="relative">
+                            <input type="text" placeholder="Search resources..." class="pl-4 pr-10 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 w-64">
+                            <div class="absolute inset-y-0 right-0 pl-3 flex items-center pr-3">
+                                <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Quick Access Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg p-6 text-white cursor-pointer hover:from-blue-600 hover:to-blue-700 transition duration-300">
+                <div class="flex items-center">
+                    <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                    </svg>
+                    <div class="ml-4">
+                        <h3 class="text-lg font-semibold">Crisis Support</h3>
+                        <p class="text-sm opacity-90">Immediate help</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-lg p-6 text-white cursor-pointer hover:from-green-600 hover:to-green-700 transition duration-300">
+                <div class="flex items-center">
+                    <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                    </svg>
+                    <div class="ml-4">
+                        <h3 class="text-lg font-semibold">Self-Care</h3>
+                        <p class="text-sm opacity-90">Daily practices</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg p-6 text-white cursor-pointer hover:from-purple-600 hover:to-purple-700 transition duration-300">
+                <div class="flex items-center">
+                    <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.832 18.477 19.246 18 17.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                    <div class="ml-4">
+                        <h3 class="text-lg font-semibold">Educational</h3>
+                        <p class="text-sm opacity-90">Learn & grow</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-lg p-6 text-white cursor-pointer hover:from-yellow-600 hover:to-yellow-700 transition duration-300">
+                <div class="flex items-center">
+                    <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                    </svg>
+                    <div class="ml-4">
+                        <h3 class="text-lg font-semibold">Guided Sessions</h3>
+                        <p class="text-sm opacity-90">Audio & video</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="mb-8">
+            <div class="border-b border-gray-200">
+                <nav class="-mb-px flex space-x-8">
+                    <button class="tab-btn active border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm" data-tab="all">
+                        All Resources
+                    </button>
+                    <button class="tab-btn border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm" data-tab="articles">
+                        Articles
+                    </button>
+                    <button class="tab-btn border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm" data-tab="exercises">
+                        Exercises
+                    </button>
+                    <button class="tab-btn border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm" data-tab="videos">
+                        Videos
+                    </button>
+                    <button class="tab-btn border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm" data-tab="tools">
+                        Tools
+                    </button>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Featured Resources -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Featured This Week</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="h-48 bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center">
+                        <svg class="h-16 w-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
+                                Meditation
+                            </span>
+                            <span class="text-sm text-gray-500">8 min read</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">5-Minute Stress Relief Meditation</h3>
+                        <p class="text-gray-600 mb-4">A quick guided meditation to help you manage stress and anxiety during busy days.</p>
+                        <button class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition duration-150">
+                            Start Session
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="h-48 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                        <svg class="h-16 w-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.832 18.477 19.246 18 17.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                Article
+                            </span>
+                            <span class="text-sm text-gray-500">12 min read</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Understanding Anxiety: Signs and Coping Strategies</h3>
+                        <p class="text-gray-600 mb-4">Learn about anxiety symptoms and evidence-based techniques to manage them effectively.</p>
+                        <button class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition duration-150">
+                            Read Article
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resource Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Resource Card 1 -->
+            <div class="bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                <svg class="h-4 w-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <span class="text-xs font-medium text-blue-600 bg-blue-100 px-2 py-1 rounded">Video</span>
+                        </div>
+                        <span class="text-sm text-gray-500">15 min</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Progressive Muscle Relaxation</h3>
+                    <p class="text-gray-600 text-sm mb-4">A guided exercise to help release physical tension and promote relaxation.</p>
+                    <div class="flex items-center space-x-2 text-sm text-gray-500 mb-4">
+                        <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>842 users found this helpful</span>
+                    </div>
+                    <button class="w-full bg-gray-100 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-200 transition duration-150">
+                        Watch Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- Resource Card 2 -->
+            <div class="bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                <svg class="h-4 w-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                </svg>
+                            </div>
+                            <span class="text-xs font-medium text-green-600 bg-green-100 px-2 py-1 rounded">Exercise</span>
+                        </div>
+                        <span class="text-sm text-gray-500">5 min</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">4-7-8 Breathing Technique</h3>
+                    <p class="text-gray-600 text-sm mb-4">A simple breathing exercise to reduce anxiety and improve sleep quality.</p>
+                    <div class="flex items-center space-x-2 text-sm text-gray-500 mb-4">
+                        <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>1,234 users found this helpful</span>
+                    </div>
+                    <button class="w-full bg-gray-100 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-200 transition duration-150">
+                        Try Exercise
+                    </button>
+                </div>
+            </div>
+
+            <!-- Resource Card 3 -->
+            <div class="bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                                <svg class="h-4 w-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.832 18.477 19.246 18 17.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                </svg>
+                            </div>
+                            <span class="text-xs font-medium text-purple-600 bg-purple-100 px-2 py-1 rounded">Article</span>
+                        </div>
+                        <span class="text-sm text-gray-500">7 min read</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Building Healthy Sleep Habits</h3>
+                    <p class="text-gray-600 text-sm mb-4">Evidence-based strategies for improving sleep quality and establishing a bedtime routine.</p>
+                    <div class="flex items-center space-x-2 text-sm text-gray-500 mb-4">
+                        <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>956 users found this helpful</span>
+                    </div>
+                    <button class="w-full bg-gray-100 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-200 transition duration-150">
+                        Read Article
+                    </button>
+                </div>
+            </div>
+
+            <!-- Resource Card 4 -->
+            <div class="bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
+                                <svg class="h-4 w-4 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <span class="text-xs font-medium text-yellow-600 bg-yellow-100 px-2 py-1 rounded">Tool</span>
+                        </div>
+                        <span class="text-sm text-gray-500">Interactive</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Mood Tracker & Journal</h3>
+                    <p class="text-gray-600 text-sm mb-4">An interactive tool to track daily moods and reflect on emotional patterns.</p>
+                    <div class="flex items-center space-x-2 text-sm text-gray-500 mb-4">
+                        <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>2,108 users found this helpful</span>
+                    </div>
+                    <button class="w-full bg-gray-100 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-200 transition duration-150">
+                        Use Tool
+                    </button>
+                </div>
+            </div>
+
+            <!-- Resource Card 5 -->
+            <div class="bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
+                                <svg class="h-4 w-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16c-.77.833.192 2.5 1.732 2.5z"></path>
+                                </svg>
+                            </div>
+                            <span class="text-xs font-medium text-red-600 bg-red-100 px-2 py-1 rounded">Crisis</span>
+                        </div>
+                        <span class="text-sm text-gray-500">24/7</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Crisis Support Resources</h3>
+                    <p class="text-gray-600 text-sm mb-4">Immediate help and emergency contact information for mental health crises.</p>
+                    <div class="flex items-center space-x-2 text-sm text-gray-500 mb-4">
+                        <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Available 24/7</span>
+                    </div>
+                    <button class="w-full bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 transition duration-150">
+                        Get Help Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- Resource Card 6 -->
+            <div class="bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center">
+                                <svg class="h-4 w-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                            </div>
+                            <span class="text-xs font-medium text-indigo-600 bg-indigo-100 px-2 py-1 rounded">Community</span>
+                        </div>
+                        <span class="text-sm text-gray-500">Join</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Support Group Finder</h3>
+                    <p class="text-gray-600 text-sm mb-4">Connect with local and online support groups for various mental health topics.</p>
+                    <div class="flex items-center space-x-2 text-sm text-gray-500 mb-4">
+                        <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>45 active groups</span>
+                    </div>
+                    <button class="w-full bg-gray-100 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-200 transition duration-150">
+                        Find Groups
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Load More -->
+        <div class="mt-12 text-center">
+            <button class="bg-indigo-600 text-white px-8 py-3 rounded-md hover:bg-indigo-700 transition duration-150">
+                Load More Resources
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+// Tab functionality
+document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        // Remove active state from all tabs
+        document.querySelectorAll('.tab-btn').forEach(tab => {
+            tab.classList.remove('border-indigo-500', 'text-indigo-600');
+            tab.classList.add('border-transparent', 'text-gray-500');
+        });
+        
+        // Add active state to clicked tab
+        this.classList.remove('border-transparent', 'text-gray-500');
+        this.classList.add('border-indigo-500', 'text-indigo-600');
+        
+        // Here you would filter the resources based on the selected tab
+        const selectedTab = this.getAttribute('data-tab');
+        console.log('Selected tab:', selectedTab);
+    });
+});
+
+// Set initial active tab
+document.querySelector('.tab-btn[data-tab="all"]').classList.add('border-indigo-500', 'text-indigo-600');
+document.querySelector('.tab-btn[data-tab="all"]').classList.remove('border-transparent', 'text-gray-500');
+</script>
+{% endblock %}

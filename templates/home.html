@@ -1,0 +1,333 @@
+{% extends 'base.html' %}
+
+{% block title %}MindBridge - Your Mental Wellness Journey Starts Here{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="gradient-bg text-white relative overflow-hidden">
+    <div class="absolute inset-0 bg-black opacity-20"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <div class="text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                Your Mental Wellness <br>
+                <span class="text-yellow-300">Journey Starts Here</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+                Connect with verified therapists, track your mood, join support communities, 
+                and access wellness resources—all in one secure, compassionate platform.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/register/" class="bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors">
+                    Start Your Journey
+                </a>
+                <a href="/appointments/find-matches/" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-purple-600 transition-colors">
+                    Get Matched
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Floating Elements -->
+    <div class="absolute top-20 left-10 w-20 h-20 bg-white bg-opacity-10 rounded-full animate-pulse"></div>
+    <div class="absolute bottom-20 right-10 w-32 h-32 bg-white bg-opacity-10 rounded-full animate-pulse delay-1000"></div>
+</section>
+
+<!-- Stats Section -->
+<section class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+            <div class="p-6">
+                <div class="text-4xl font-bold text-blue-600 mb-2">10K+</div>
+                <div class="text-gray-600">Lives Transformed</div>
+            </div>
+            <div class="p-6">
+                <div class="text-4xl font-bold text-green-600 mb-2">500+</div>
+                <div class="text-gray-600">Verified Therapists</div>
+            </div>
+            <div class="p-6">
+                <div class="text-4xl font-bold text-purple-600 mb-2">24/7</div>
+                <div class="text-gray-600">Crisis Support</div>
+            </div>
+            <div class="p-6">
+                <div class="text-4xl font-bold text-orange-600 mb-2">98%</div>
+                <div class="text-gray-600">Satisfaction Rate</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Everything You Need for Mental Wellness
+            </h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Our comprehensive platform provides tools, resources, and connections to support your mental health journey.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Mood Tracking -->
+            <div class="mood-card bg-white p-8 rounded-xl shadow-lg">
+                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
+                    <i class="fas fa-chart-line text-blue-600 text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Mood Tracking</h3>
+                <p class="text-gray-600 mb-4">
+                    Track your daily moods and emotions with our intuitive interface. 
+                    Get insights into your mental health patterns over time.
+                </p>
+                <ul class="text-sm text-gray-500 space-y-1">
+                    <li>✓ Daily mood check-ins</li>
+                    <li>✓ Mood analytics & trends</li>
+                    <li>✓ Personalized insights</li>
+                </ul>
+            </div>
+            
+            <!-- Professional Support -->
+            <div class="mood-card bg-white p-8 rounded-xl shadow-lg">
+                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-6">
+                    <i class="fas fa-user-md text-green-600 text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Professional Support</h3>
+                <p class="text-gray-600 mb-4">
+                    Connect with licensed therapists, counselors, and psychiatrists. 
+                    Book appointments and join therapy sessions from home.
+                </p>
+                <ul class="text-sm text-gray-500 space-y-1">
+                    <li>✓ Verified professionals</li>
+                    <li>✓ Video & chat sessions</li>
+                    <li>✓ Flexible scheduling</li>
+                </ul>
+            </div>
+            
+            <!-- Crisis Support -->
+            <div class="mood-card bg-white p-8 rounded-xl shadow-lg">
+                <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-6">
+                    <i class="fas fa-phone text-red-600 text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Crisis Support</h3>
+                <p class="text-gray-600 mb-4">
+                    24/7 crisis intervention and emergency support. 
+                    Immediate help when you need it most.
+                </p>
+                <ul class="text-sm text-gray-500 space-y-1">
+                    <li>✓ 24/7 availability</li>
+                    <li>✓ Instant crisis alerts</li>
+                    <li>✓ Emergency contacts</li>
+                </ul>
+            </div>
+            
+            <!-- Community Support -->
+            <div class="mood-card bg-white p-8 rounded-xl shadow-lg">
+                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
+                    <i class="fas fa-users text-purple-600 text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Community Support</h3>
+                <p class="text-gray-600 mb-4">
+                    Join support groups and connect with others on similar journeys. 
+                    Share experiences in a safe, moderated environment.
+                </p>
+                <ul class="text-sm text-gray-500 space-y-1">
+                    <li>✓ Peer support groups</li>
+                    <li>✓ Anonymous options</li>
+                    <li>✓ Moderated discussions</li>
+                </ul>
+            </div>
+            
+            <!-- Wellness Resources -->
+            <div class="mood-card bg-white p-8 rounded-xl shadow-lg">
+                <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-6">
+                    <i class="fas fa-book text-yellow-600 text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Wellness Library</h3>
+                <p class="text-gray-600 mb-4">
+                    Access guided meditations, exercises, articles, and resources 
+                    curated by mental health professionals.
+                </p>
+                <ul class="text-sm text-gray-500 space-y-1">
+                    <li>✓ Guided meditations</li>
+                    <li>✓ Wellness exercises</li>
+                    <li>✓ Educational content</li>
+                </ul>
+            </div>
+            
+            <!-- Privacy & Security -->
+            <div class="mood-card bg-white p-8 rounded-xl shadow-lg">
+                <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
+                    <i class="fas fa-shield-alt text-indigo-600 text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Privacy & Security</h3>
+                <p class="text-gray-600 mb-4">
+                    Your data is protected with enterprise-grade security. 
+                    HIPAA-compliant and fully encrypted.
+                </p>
+                <ul class="text-sm text-gray-500 space-y-1">
+                    <li>✓ End-to-end encryption</li>
+                    <li>✓ HIPAA compliant</li>
+                    <li>✓ Anonymous options</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                How MindBridge Works
+            </h2>
+            <p class="text-xl text-gray-600">
+                Getting started with your mental wellness journey is simple
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <span class="text-white font-bold text-xl">1</span>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Create Your Profile</h3>
+                <p class="text-gray-600">
+                    Sign up and complete your profile with preferences, goals, and any specific needs or concerns.
+                </p>
+            </div>
+            
+            <div class="text-center">
+                <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <span class="text-white font-bold text-xl">2</span>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Get Matched</h3>
+                <p class="text-gray-600">
+                    Our algorithm matches you with therapists, support groups, and resources tailored to your needs.
+                </p>
+            </div>
+            
+            <div class="text-center">
+                <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <span class="text-white font-bold text-xl">3</span>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Start Your Journey</h3>
+                <p class="text-gray-600">
+                    Begin tracking your mood, connecting with professionals, and accessing wellness resources.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="gradient-bg text-white py-20">
+    <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">
+            Ready to Transform Your Mental Health?
+        </h2>
+        <p class="text-xl mb-8">
+            Join thousands of people who have found support, healing, and growth through MindBridge.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/register/" class="bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors">
+                Start Free Today
+            </a>
+            <a href="/appointments/find-matches/" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-purple-600 transition-colors">
+                Get Matched Now
+            </a>
+        </div>
+        <p class="text-sm mt-6 text-gray-200">
+            No credit card required • Free 14-day trial • Cancel anytime
+        </p>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                What Our Community Says
+            </h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-8 rounded-xl shadow-lg">
+                <div class="flex items-center mb-4">
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <p class="text-gray-600 mb-6">
+                    "MindBridge helped me find the right therapist and gave me tools to track my progress. 
+                    The community support has been incredible."
+                </p>
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                        <span class="text-blue-600 font-semibold">S</span>
+                    </div>
+                    <div>
+                        <div class="font-semibold">Sarah M.</div>
+                        <div class="text-sm text-gray-500">Client since 2023</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white p-8 rounded-xl shadow-lg">
+                <div class="flex items-center mb-4">
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <p class="text-gray-600 mb-6">
+                    "As a therapist, MindBridge makes it easy to connect with clients and provide 
+                    comprehensive care. The platform is intuitive and secure."
+                </p>
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                        <span class="text-green-600 font-semibold">M</span>
+                    </div>
+                    <div>
+                        <div class="font-semibold">Dr. Maria Rodriguez</div>
+                        <div class="text-sm text-gray-500">Licensed Therapist</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white p-8 rounded-xl shadow-lg">
+                <div class="flex items-center mb-4">
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <p class="text-gray-600 mb-6">
+                    "The crisis support feature gave me peace of mind during a difficult time. 
+                    Knowing help was just a click away made all the difference."
+                </p>
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-3">
+                        <span class="text-purple-600 font-semibold">J</span>
+                    </div>
+                    <div>
+                        <div class="font-semibold">James K.</div>
+                        <div class="text-sm text-gray-500">Community Member</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

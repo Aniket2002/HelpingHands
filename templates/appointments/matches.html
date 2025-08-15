@@ -1,0 +1,255 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Find Your Perfect Therapist Match - MindBridge{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+    <!-- Header -->
+    <div class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="py-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-900">Your Therapist Matches</h1>
+                        <p class="mt-1 text-sm text-gray-500">
+                            {% if has_preferences %}
+                                Based on your preferences and needs
+                            {% else %}
+                                General recommendations - <a href="{% url 'setup-preferences' %}" class="text-blue-600 hover:underline">set your preferences</a> for better matches
+                            {% endif %}
+                        </p>
+                    </div>
+                    <div class="flex space-x-3">
+                        <a href="{% url 'setup-preferences' %}" class="text-blue-600 border border-blue-600 px-4 py-2 rounded-md hover:bg-blue-50 transition duration-150">
+                            Update Preferences
+                        </a>
+                        <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-150">
+                            Refine Matches
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {% if not has_preferences %}
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
+            <div class="flex items-start">
+                <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-lg font-medium text-blue-900">Get Better Matches</h3>
+                    <div class="mt-2 text-sm text-blue-700">
+                        <p>Tell us about your needs and preferences to get personalized therapist recommendations that are tailored just for you.</p>
+                    </div>
+                    <div class="mt-4">
+                        <a href="{% url 'setup-preferences' %}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-150">
+                            Set Up My Preferences
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if matches %}
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Matches List -->
+            <div class="lg:col-span-2 space-y-6">
+                {% for match in matches %}
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow duration-200">
+                    <div class="p-6">
+                        <div class="flex items-start justify-between">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <span class="text-blue-600 font-semibold text-lg">
+                                        {{ match.therapist.user.first_name|first }}{{ match.therapist.user.last_name|first }}
+                                    </span>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="text-xl font-semibold text-gray-900">
+                                        Dr. {{ match.therapist.user.get_full_name }}
+                                    </h3>
+                                    <p class="text-gray-600 mt-1">
+                                        {{ match.therapist.years_of_experience }} years experience
+                                        {% if match.therapist.rating > 0 %}
+                                        • ⭐ {{ match.therapist.rating|floatformat:1 }}/5.0
+                                        {% endif %}
+                                    </p>
+                                    
+                                    <!-- Specializations -->
+                                    <div class="mt-3 flex flex-wrap gap-2">
+                                        {% for spec in match.therapist.get_specializations_display|slice:":3" %}
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                            {{ spec }}
+                                        </span>
+                                        {% endfor %}
+                                        {% if match.therapist.get_specializations_display|length > 3 %}
+                                        <span class="text-xs text-gray-500">+{{ match.therapist.get_specializations_display|length|add:"-3" }} more</span>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    <!-- Bio excerpt -->
+                                    <p class="text-gray-700 mt-3 text-sm">
+                                        {{ match.therapist.bio|truncatewords:25 }}
+                                    </p>
+                                    
+                                    <!-- Match Reasons -->
+                                    <div class="mt-4">
+                                        <p class="text-sm font-medium text-gray-900 mb-2">Why this is a good match:</p>
+                                        <ul class="text-sm text-gray-600 space-y-1">
+                                            {% for reason in match.match_reasons|slice:":3" %}
+                                            <li class="flex items-center">
+                                                <svg class="w-3 h-3 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                                </svg>
+                                                {{ reason }}
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Match Score -->
+                            <div class="text-center">
+                                <div class="w-20 h-20 mx-auto mb-2">
+                                    <div class="relative w-20 h-20">
+                                        <svg class="w-20 h-20 transform -rotate-90" viewBox="0 0 36 36">
+                                            <path class="text-gray-200" stroke="currentColor" stroke-width="3" fill="none" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831a15.9155 15.9155 0 0 1 0-31.831"/>
+                                            <path class="text-green-500" stroke="currentColor" stroke-width="3" fill="none" stroke-dasharray="{{ match.score|floatformat:0 }}, 100" d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831a15.9155 15.9155 0 0 1 0-31.831"/>
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <span class="text-lg font-bold text-gray-700">{{ match.score|floatformat:0 }}%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-gray-500">Match Score</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Actions -->
+                        <div class="mt-6 flex items-center justify-between pt-4 border-t border-gray-100">
+                            <div class="flex items-center space-x-4 text-sm text-gray-600">
+                                <span>${{ match.therapist.rate_per_session }}/session</span>
+                                {% if match.therapist.accepts_insurance %}
+                                <span class="text-green-600">Accepts Insurance</span>
+                                {% endif %}
+                                {% if match.therapist.is_accepting_clients %}
+                                <span class="text-green-600">Accepting Clients</span>
+                                {% else %}
+                                <span class="text-orange-600">Waitlist Available</span>
+                                {% endif %}
+                            </div>
+                            <div class="flex space-x-3">
+                                <a href="{% url 'therapist-detail' match.therapist.user.id %}" class="text-blue-600 border border-blue-600 px-4 py-2 rounded-md hover:bg-blue-50 transition duration-150">
+                                    View Profile
+                                </a>
+                                <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-150">
+                                    Book Consultation
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="space-y-6">
+                <!-- Filter & Sort -->
+                <div class="bg-white shadow rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Refine Your Search</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Sort By</label>
+                            <select class="w-full rounded-md border-gray-300 text-sm">
+                                <option>Best Match</option>
+                                <option>Highest Rated</option>
+                                <option>Most Experienced</option>
+                                <option>Lowest Price</option>
+                                <option>Soonest Available</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Budget Range</label>
+                            <select class="w-full rounded-md border-gray-300 text-sm">
+                                <option>Any Budget</option>
+                                <option>Under $100</option>
+                                <option>$100 - $150</option>
+                                <option>$150 - $200</option>
+                                <option>Over $200</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Availability</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300">
+                                    <span class="ml-2 text-sm text-gray-700">This Week</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300">
+                                    <span class="ml-2 text-sm text-gray-700">Next Week</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300">
+                                    <span class="ml-2 text-sm text-gray-700">Flexible</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Need Help -->
+                <div class="bg-white shadow rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Need Help Choosing?</h3>
+                    <div class="space-y-3">
+                        <p class="text-sm text-gray-600">
+                            Our matching algorithm considers your specific needs, but sometimes talking to someone can help.
+                        </p>
+                        <button class="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition duration-150">
+                            Chat with Care Coordinator
+                        </button>
+                        <button class="w-full text-blue-600 border border-blue-600 py-2 rounded-md hover:bg-blue-50 transition duration-150">
+                            Take Matching Quiz
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Crisis Support -->
+                <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                    <h4 class="font-medium text-red-800 mb-2">Need Immediate Help?</h4>
+                    <p class="text-sm text-red-700 mb-3">
+                        If you're in crisis, don't wait for an appointment.
+                    </p>
+                    <button class="w-full bg-red-600 text-white py-2 rounded-md hover:bg-red-700 transition duration-150">
+                        Get Crisis Support
+                    </button>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="text-center py-12">
+            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+            </svg>
+            <h3 class="mt-2 text-sm font-medium text-gray-900">No matches found</h3>
+            <p class="mt-1 text-sm text-gray-500">
+                We couldn't find any therapists matching your criteria. Try adjusting your preferences.
+            </p>
+            <div class="mt-6">
+                <a href="{% url 'setup-preferences' %}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-150">
+                    Update Preferences
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
