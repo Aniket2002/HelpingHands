@@ -173,16 +173,38 @@
                         <div class="mt-8 pt-6 border-t border-gray-200">
                             <div class="text-center">
                                 <p class="text-sm text-gray-500 mb-4">Quick Demo Access</p>
-                                <div class="grid grid-cols-2 gap-3 text-xs">
-                                    <div class="bg-gray-50 p-3 rounded-lg">
-                                        <p class="font-medium text-gray-700">Demo User</p>
-                                        <p class="text-gray-500">demo@mindbridge.com</p>
+                                <div class="space-y-3">
+                                    <!-- Client Demo -->
+                                    <div class="bg-blue-50 border border-blue-200 p-3 rounded-lg cursor-pointer hover:bg-blue-100 transition-colors" 
+                                         onclick="fillDemoCredentials('demo@mindbridge.com', 'demo123456')">
+                                        <div class="grid grid-cols-2 gap-3 text-xs">
+                                            <div>
+                                                <p class="font-medium text-blue-700">Demo Client</p>
+                                                <p class="text-blue-600">demo@mindbridge.com</p>
+                                            </div>
+                                            <div>
+                                                <p class="font-medium text-blue-700">Password</p>
+                                                <p class="text-blue-600">demo123456</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="bg-gray-50 p-3 rounded-lg">
-                                        <p class="font-medium text-gray-700">Password</p>
-                                        <p class="text-gray-500">demo123456</p>
+                                    
+                                    <!-- Therapist Demo -->
+                                    <div class="bg-green-50 border border-green-200 p-3 rounded-lg cursor-pointer hover:bg-green-100 transition-colors" 
+                                         onclick="fillDemoCredentials('therapist@mindbridge.com', 'demo123456')">
+                                        <div class="grid grid-cols-2 gap-3 text-xs">
+                                            <div>
+                                                <p class="font-medium text-green-700">Demo Therapist</p>
+                                                <p class="text-green-600">therapist@mindbridge.com</p>
+                                            </div>
+                                            <div>
+                                                <p class="font-medium text-green-700">Password</p>
+                                                <p class="text-green-600">demo123456</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                                <p class="text-xs text-gray-400 mt-2">Click on credentials to auto-fill</p>
                             </div>
                         </div>
                     </div>
@@ -191,4 +213,23 @@
         </div>
     </div>
 </div>
+
+<script>
+function fillDemoCredentials(email, password) {
+    document.getElementById('email').value = email;
+    document.getElementById('password').value = password;
+    
+    // Add a subtle animation to show the fields were filled
+    const emailField = document.getElementById('email');
+    const passwordField = document.getElementById('password');
+    
+    emailField.classList.add('bg-yellow-50', 'border-yellow-300');
+    passwordField.classList.add('bg-yellow-50', 'border-yellow-300');
+    
+    setTimeout(() => {
+        emailField.classList.remove('bg-yellow-50', 'border-yellow-300');
+        passwordField.classList.remove('bg-yellow-50', 'border-yellow-300');
+    }, 1500);
+}
+</script>
 {% endblock %}

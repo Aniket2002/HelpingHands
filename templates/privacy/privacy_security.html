@@ -1,0 +1,381 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Privacy & Security - MindBridge{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+    <!-- Header -->
+    <div class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="py-6">
+                <h1 class="text-3xl font-bold text-gray-900">Privacy & Security</h1>
+                <p class="mt-1 text-sm text-gray-500">Manage your privacy settings and data security</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- HIPAA Compliance Badge -->
+        <div class="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-lg p-6 mb-8">
+            <div class="flex items-center">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                    <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="text-xl font-semibold text-gray-900">HIPAA Compliant Platform</h2>
+                    <p class="text-gray-600">Your mental health data is protected with enterprise-grade security and HIPAA compliance standards.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Privacy Settings -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- Data Visibility -->
+                <div class="bg-white shadow rounded-lg">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-900">Data Visibility Settings</h3>
+                        <p class="text-sm text-gray-600">Control who can see your mental health data</p>
+                    </div>
+                    <div class="p-6 space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Profile Information</label>
+                            <select class="w-full border border-gray-300 rounded-md px-3 py-2">
+                                <option value="private">Private - Only me</option>
+                                <option value="therapist">Therapist only</option>
+                                <option value="friends">Friends only</option>
+                                <option value="public">Public</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Mood Data</label>
+                            <select class="w-full border border-gray-300 rounded-md px-3 py-2">
+                                <option value="private">Private - Only me</option>
+                                <option value="therapist" selected>Therapist only</option>
+                                <option value="friends">Friends only</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Journal Entries</label>
+                            <select class="w-full border border-gray-300 rounded-md px-3 py-2">
+                                <option value="private" selected>Private - Only me</option>
+                                <option value="therapist">Therapist only</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Activity & Progress</label>
+                            <select class="w-full border border-gray-300 rounded-md px-3 py-2">
+                                <option value="private" selected>Private - Only me</option>
+                                <option value="therapist">Therapist only</option>
+                                <option value="friends">Friends only</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Retention -->
+                <div class="bg-white shadow rounded-lg">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-900">Data Retention</h3>
+                        <p class="text-sm text-gray-600">How long we keep your data</p>
+                    </div>
+                    <div class="p-6 space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Mood Tracking Data</label>
+                            <select class="w-full border border-gray-300 rounded-md px-3 py-2">
+                                <option value="30">30 days</option>
+                                <option value="90">90 days</option>
+                                <option value="365" selected>1 year</option>
+                                <option value="1095">3 years</option>
+                                <option value="-1">Indefinitely</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Journal Entries</label>
+                            <select class="w-full border border-gray-300 rounded-md px-3 py-2">
+                                <option value="90">90 days</option>
+                                <option value="365">1 year</option>
+                                <option value="1095" selected>3 years</option>
+                                <option value="-1">Indefinitely</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Chat Messages</label>
+                            <select class="w-full border border-gray-300 rounded-md px-3 py-2">
+                                <option value="30">30 days</option>
+                                <option value="90" selected>90 days</option>
+                                <option value="365">1 year</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Communication Preferences -->
+                <div class="bg-white shadow rounded-lg">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-900">Communication Preferences</h3>
+                        <p class="text-sm text-gray-600">Control who can contact you</p>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <label class="text-sm font-medium text-gray-700">Therapist Messages</label>
+                                <p class="text-xs text-gray-500">Allow your therapist to send you messages</p>
+                            </div>
+                            <input type="checkbox" checked class="rounded border-gray-300 text-indigo-600">
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <label class="text-sm font-medium text-gray-700">Peer Messages</label>
+                                <p class="text-xs text-gray-500">Allow other users to send you messages</p>
+                            </div>
+                            <input type="checkbox" class="rounded border-gray-300 text-indigo-600">
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <label class="text-sm font-medium text-gray-700">Group Invitations</label>
+                                <p class="text-xs text-gray-500">Allow invitations to support groups</p>
+                            </div>
+                            <input type="checkbox" checked class="rounded border-gray-300 text-indigo-600">
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <label class="text-sm font-medium text-gray-700">Research Participation</label>
+                                <p class="text-xs text-gray-500">Invitations for mental health research (anonymous)</p>
+                            </div>
+                            <input type="checkbox" class="rounded border-gray-300 text-indigo-600">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Settings -->
+                <div class="bg-white shadow rounded-lg">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-900">Security Settings</h3>
+                        <p class="text-sm text-gray-600">Additional security for your account</p>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <label class="text-sm font-medium text-gray-700">Two-Factor Authentication</label>
+                                <p class="text-xs text-gray-500">Add an extra layer of security to your account</p>
+                            </div>
+                            <button class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 text-sm">
+                                Enable 2FA
+                            </button>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <label class="text-sm font-medium text-gray-700">Login Notifications</label>
+                                <p class="text-xs text-gray-500">Get notified of new logins to your account</p>
+                            </div>
+                            <input type="checkbox" checked class="rounded border-gray-300 text-indigo-600">
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <label class="text-sm font-medium text-gray-700">Data Export Notifications</label>
+                                <p class="text-xs text-gray-500">Get notified when your data is exported</p>
+                            </div>
+                            <input type="checkbox" checked class="rounded border-gray-300 text-indigo-600">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Rights -->
+                <div class="bg-white shadow rounded-lg">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-900">Your Data Rights</h3>
+                        <p class="text-sm text-gray-600">GDPR and HIPAA rights</p>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                            <div>
+                                <h4 class="text-sm font-medium text-gray-900">Download Your Data</h4>
+                                <p class="text-xs text-gray-500">Get a copy of all your data in a portable format</p>
+                            </div>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 text-sm">
+                                Request Export
+                            </button>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                            <div>
+                                <h4 class="text-sm font-medium text-gray-900">Delete Your Data</h4>
+                                <p class="text-xs text-gray-500">Permanently delete your account and all associated data</p>
+                            </div>
+                            <button class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 text-sm">
+                                Request Deletion
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Sidebar -->
+            <div class="space-y-6">
+                <!-- Security Score -->
+                <div class="bg-white shadow rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Security Score</h3>
+                    <div class="text-center">
+                        <div class="relative inline-flex items-center justify-center w-24 h-24">
+                            <svg class="w-24 h-24 transform -rotate-90" viewBox="0 0 36 36">
+                                <path class="text-gray-200" stroke="currentColor" stroke-width="3" fill="none" d="M18 2.0845a 15.9155 15.9155 0 0 1 0 31.831a 15.9155 15.9155 0 0 1 0-31.831"/>
+                                <path class="text-green-500" stroke="currentColor" stroke-width="3" stroke-dasharray="75, 100" fill="none" d="M18 2.0845a 15.9155 15.9155 0 0 1 0 31.831a 15.9155 15.9155 0 0 1 0-31.831"/>
+                            </svg>
+                            <span class="absolute text-xl font-semibold text-gray-900">75%</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2">Good Security</p>
+                    </div>
+                    
+                    <div class="mt-6 space-y-3">
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+                            <span class="text-sm text-gray-700">Strong password</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+                            <span class="text-sm text-gray-700">Data encryption enabled</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
+                            <span class="text-sm text-gray-700">2FA not enabled</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+                            <span class="text-sm text-gray-700">Recent login review</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="bg-white shadow rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Recent Security Activity</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+                            <div>
+                                <p class="text-sm text-gray-900">Successful login</p>
+                                <p class="text-xs text-gray-500">2 hours ago • Chrome on Windows</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <div class="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+                            <div>
+                                <p class="text-sm text-gray-900">Privacy settings updated</p>
+                                <p class="text-xs text-gray-500">1 day ago</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <div class="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+                            <div>
+                                <p class="text-sm text-gray-900">Password changed</p>
+                                <p class="text-xs text-gray-500">3 days ago</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full mt-4 text-indigo-600 hover:text-indigo-700 text-sm font-medium">
+                        View Full Activity Log
+                    </button>
+                </div>
+
+                <!-- Compliance Certificates -->
+                <div class="bg-white shadow rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Compliance & Certifications</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                                <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-900">HIPAA Compliant</p>
+                                <p class="text-xs text-gray-500">Health data protection</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                                <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-900">GDPR Compliant</p>
+                                <p class="text-xs text-gray-500">EU data protection</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                                <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-900">SOC 2 Type II</p>
+                                <p class="text-xs text-gray-500">Security controls</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                                <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-900">256-bit Encryption</p>
+                                <p class="text-xs text-gray-500">Data protection</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emergency Contacts -->
+                <div class="bg-white shadow rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Emergency Data Access</h3>
+                    <p class="text-sm text-gray-600 mb-4">Trusted contacts who can access your data in emergencies</p>
+                    
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                            <div>
+                                <p class="text-sm font-medium text-gray-900">Dr. Sarah Johnson</p>
+                                <p class="text-xs text-gray-500">Primary Therapist</p>
+                            </div>
+                            <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">Active</span>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full mt-4 text-indigo-600 hover:text-indigo-700 text-sm font-medium">
+                        + Add Emergency Contact
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Save Button -->
+        <div class="mt-8 flex justify-end">
+            <button class="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition duration-150">
+                Save Privacy Settings
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -84,7 +84,7 @@ class CrisisAlert(models.Model):
         ('critical', 'Critical - Immediate Response'),
     ]
     
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='crisis_alerts')
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='chat_crisis_alerts')
     alert_level = models.CharField(max_length=20, choices=ALERT_LEVELS)
     message = models.TextField()
     location = models.CharField(max_length=200, blank=True)

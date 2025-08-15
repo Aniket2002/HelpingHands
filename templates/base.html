@@ -8,6 +8,17 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- Theme Configuration -->
+    <script>
+        // Configure Tailwind for dark mode
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {}
+            }
+        }
+    </script>
+    
     <!-- Alpine.js for interactivity -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     
@@ -34,11 +45,51 @@
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
+        
+        /* Theme-specific styles */
+        .theme-transition {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        /* High contrast mode */
+        .high-contrast {
+            filter: contrast(150%);
+        }
+        
+        /* Large text mode */
+        .large-text {
+            font-size: 1.125rem;
+            line-height: 1.75rem;
+        }
+        
+        .large-text h1 { font-size: 2.5rem; }
+        .large-text h2 { font-size: 2rem; }
+        .large-text h3 { font-size: 1.5rem; }
+        
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .reduce-motion * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
     </style>
     
     {% block extra_head %}{% endblock %}
 </head>
-<body class="bg-gray-50 font-sans">
+<body class="dark bg-gray-900 text-white min-h-screen 
+           {% if user_high_contrast %}high-contrast{% endif %}
+           {% if user_large_text %}large-text{% endif %}
+           {% if user_reduce_motion %}reduce-motion{% endif %}
+           font-sans theme-transition">
+    
+    <!-- Debug info (remove in production) -->
+    {% if user.is_authenticated %}
+        <div class="fixed top-0 right-0 bg-red-500 text-white p-2 text-xs z-50">
+            Theme: {{ user_theme|default:"none" }} | HC: {{ user_high_contrast|yesno:"yes,no" }} | LT: {{ user_large_text|yesno:"yes,no" }}
+        </div>
+    {% endif %}
     <!-- Navigation -->
     <nav class="bg-white shadow-lg sticky top-0 z-50" x-data="{ mobileOpen: false }">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -59,15 +110,26 @@
                 <div class="hidden md:flex items-center space-x-8">
                     {% if user.is_authenticated %}
                         <a href="/dashboard/" class="text-gray-700 hover:text-blue-600 transition-colors">Dashboard</a>
-                        <a href="/wellness/" class="text-gray-700 hover:text-blue-600 transition-colors">Wellness</a>
-                        <a href="/appointments/find-matches/" class="text-gray-700 hover:text-blue-600 transition-colors">Find Therapist</a>
-                        <a href="/chat/" class="text-gray-700 hover:text-blue-600 transition-colors">Support</a>
-                        <a href="/appointments/" class="text-gray-700 hover:text-blue-600 transition-colors">Appointments</a>
+                        
+                        <!-- Mood Tracking -->
+                        <a href="/wellness/mood-entries/" class="text-gray-700 hover:text-blue-600 transition-colors">Mood Tracking</a>
+                        
+                        <!-- Professional Support -->
+                        <a href="/professional/therapists/" class="text-gray-700 hover:text-blue-600 transition-colors">Find Therapist</a>
+                        
+                        <!-- Crisis Support -->
+                        <a href="/wellness/crisis-support/" class="text-gray-700 hover:text-blue-600 transition-colors text-red-600 font-medium">Crisis Support</a>
+                        
+                        <!-- Community Support -->
+                        <a href="/community/" class="text-gray-700 hover:text-blue-600 transition-colors">Community</a>
+                        
+                        <!-- Wellness Library -->
+                        <a href="/library/" class="text-gray-700 hover:text-blue-600 transition-colors">Wellness Library</a>
                         
                         <!-- User Dropdown -->
                         <div class="relative" x-data="{ open: false }">
                             <button @click="open = !open" class="flex items-center space-x-2 text-gray-700 hover:text-blue-600">
-                                <img src="{{ user.profile_picture.url|default:'/static/default-avatar.png' }}" 
+                                <img src="{{ user.profile_picture_url }}" 
                                      alt="Profile" class="w-8 h-8 rounded-full">
                                 <span>{{ user.first_name }}</span>
                                 <i class="fas fa-chevron-down text-xs"></i>
@@ -76,6 +138,9 @@
                             <div x-show="open" @click.away="open = false" 
                                  class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2">
                                 <a href="/profile/" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profile</a>
+                                <a href="/professional/appointments/" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">My Appointments</a>
+                                <a href="/professional/goals/" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Therapy Goals</a>
+                                <a href="/privacy/" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Privacy & Security</a>
                                 <a href="/settings/" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Settings</a>
                                 <hr class="my-2">
                                 <a href="/logout/" class="block px-4 py-2 text-red-600 hover:bg-gray-100">Logout</a>

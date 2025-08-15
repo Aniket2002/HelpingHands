@@ -9,6 +9,9 @@ urlpatterns = [
     path('chat/', include('apps.chat.urls')),
     path('appointments/', include('apps.appointments.urls')),
     path('community/', include('apps.community.urls')),
+    path('professional/', include('apps.professional.urls')),
+    path('library/', include('apps.library.urls')),
+    path('privacy/', include('apps.privacy.urls')),
     path('', include('apps.authentication.urls')),  # Frontend routes
 ]
 

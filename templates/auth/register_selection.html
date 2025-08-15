@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% block title %}Join MindBridge - Choose Your Path{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl w-full space-y-8">
+        <!-- Header -->
+        <div class="text-center">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Welcome to MindBridge</h1>
+            <p class="text-xl text-gray-600 mb-8">Choose how you'd like to join our mental health community</p>
+        </div>
+
+        <!-- Registration Options -->
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Client Registration -->
+            <div class="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-shadow duration-300">
+                <div class="text-center mb-6">
+                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-heart text-blue-600 text-3xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-2">I'm seeking support</h2>
+                    <p class="text-gray-600">Connect with licensed therapists and access mental health resources</p>
+                </div>
+                
+                <div class="space-y-4 mb-8">
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                        <span class="text-gray-700">Find licensed therapists</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                        <span class="text-gray-700">Book therapy sessions</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                        <span class="text-gray-700">Track your progress</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                        <span class="text-gray-700">Access wellness resources</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                        <span class="text-gray-700">Join support communities</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                        <span class="text-gray-700">24/7 crisis support</span>
+                    </div>
+                </div>
+                
+                <a href="/register/client/" class="w-full bg-blue-600 text-white py-4 rounded-xl font-semibold text-lg hover:bg-blue-700 transition-colors duration-200 block text-center">
+                    Start Your Journey
+                </a>
+                
+                <p class="text-sm text-gray-500 text-center mt-4">Free to join • HIPAA compliant • Secure</p>
+            </div>
+
+            <!-- Therapist Registration -->
+            <div class="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-shadow duration-300">
+                <div class="text-center mb-6">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-user-md text-green-600 text-3xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-2">I'm a therapist</h2>
+                    <p class="text-gray-600">Join our network and connect with clients who need your expertise</p>
+                </div>
+                
+                <div class="space-y-4 mb-8">
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                        <span class="text-gray-700">Expand your practice</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                        <span class="text-gray-700">Flexible scheduling</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                        <span class="text-gray-700">Secure platform</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                        <span class="text-gray-700">Professional tools</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                        <span class="text-gray-700">Client management</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                        <span class="text-gray-700">Insurance processing</span>
+                    </div>
+                </div>
+                
+                <a href="/register/therapist/" class="w-full bg-green-600 text-white py-4 rounded-xl font-semibold text-lg hover:bg-green-700 transition-colors duration-200 block text-center">
+                    Join Our Network
+                </a>
+                
+                <p class="text-sm text-gray-500 text-center mt-4">License verification required • Professional network</p>
+            </div>
+        </div>
+
+        <!-- Bottom Section -->
+        <div class="text-center mt-12">
+            <p class="text-gray-600">
+                Already have an account? 
+                <a href="/login/" class="text-blue-600 hover:text-blue-800 font-semibold">Sign in here</a>
+            </p>
+        </div>
+
+        <!-- Trust Indicators -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mt-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div>
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-shield-alt text-blue-600 text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-1">HIPAA Compliant</h3>
+                    <p class="text-sm text-gray-600">Your privacy and data are fully protected</p>
+                </div>
+                <div>
+                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-certificate text-green-600 text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-1">Licensed Professionals</h3>
+                    <p class="text-sm text-gray-600">All therapists are verified and licensed</p>
+                </div>
+                <div>
+                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-clock text-purple-600 text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-1">24/7 Support</h3>
+                    <p class="text-sm text-gray-600">Crisis support available around the clock</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

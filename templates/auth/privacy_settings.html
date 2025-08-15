@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block title %}Privacy Settings - MindBridge{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="bg-white rounded-lg shadow">
+        <!-- Header -->
+        <div class="px-6 py-4 border-b border-gray-200">
+            <div class="flex items-center">
+                <a href="/settings/" class="text-gray-500 hover:text-gray-700 mr-4">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900">Privacy Settings</h1>
+                    <p class="text-gray-600">Control your privacy and data sharing preferences</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Form -->
+        <div class="p-6">
+            <form method="post" class="space-y-6">
+                {% csrf_token %}
+                
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="font-medium text-gray-900 mb-4">Profile Visibility</h3>
+                        <div class="space-y-3">
+                            <label class="flex items-center">
+                                <input type="radio" name="profile_visibility" value="private" class="text-blue-600"
+                                       {% if profile.notification_preferences.profile_visibility == 'private' or not profile.notification_preferences.profile_visibility %}checked{% endif %}>
+                                <span class="ml-3">
+                                    <span class="font-medium">Private</span>
+                                    <span class="block text-sm text-gray-500">Only visible to your assigned therapists</span>
+                                </span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="profile_visibility" value="limited" class="text-blue-600"
+                                       {% if profile.notification_preferences.profile_visibility == 'limited' %}checked{% endif %}>
+                                <span class="ml-3">
+                                    <span class="font-medium">Limited</span>
+                                    <span class="block text-sm text-gray-500">Visible to verified mental health professionals</span>
+                                </span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="profile_visibility" value="public" class="text-blue-600"
+                                       {% if profile.notification_preferences.profile_visibility == 'public' %}checked{% endif %}>
+                                <span class="ml-3">
+                                    <span class="font-medium">Public</span>
+                                    <span class="block text-sm text-gray-500">Visible to other users in support groups</span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start justify-between">
+                        <div class="flex-1">
+                            <h3 class="font-medium text-gray-900">Allow Contact from Other Users</h3>
+                            <p class="text-sm text-gray-500 mt-1">Allow other users to send you messages or connection requests</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer ml-4">
+                            <input type="checkbox" name="allow_contact" class="sr-only peer"
+                                   {% if profile.notification_preferences.allow_contact %}checked{% endif %}>
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                        </label>
+                    </div>
+                    
+                    <div class="flex items-start justify-between">
+                        <div class="flex-1">
+                            <h3 class="font-medium text-gray-900">Anonymous Data Sharing</h3>
+                            <p class="text-sm text-gray-500 mt-1">Share anonymized usage data to help improve mental health research</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer ml-4">
+                            <input type="checkbox" name="data_sharing" class="sr-only peer"
+                                   {% if profile.notification_preferences.data_sharing %}checked{% endif %}>
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="bg-blue-50 border-l-4 border-blue-400 p-4">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-info-circle text-blue-400"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-blue-700">
+                                Your therapy sessions and personal conversations are always private and never shared. 
+                                These settings only apply to your general profile information and usage patterns.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-end space-x-3 pt-6 border-t">
+                    <a href="/settings/" class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50">
+                        Cancel
+                    </a>
+                    <button type="submit" class="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700">
+                        Save Settings
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,247 @@
+{% extends 'base.html' %}
+
+{% block title %}Professional Support - MindBridge{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Header -->
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900">Professional Support</h1>
+        <p class="text-gray-600">Connect with licensed therapists and track your mental health journey</p>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex items-center">
+                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-calendar-check text-blue-600 text-xl"></i>
+                </div>
+                <div class="ml-4">
+                    <p class="text-sm font-medium text-gray-600">Total Sessions</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ total_sessions }}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex items-center">
+                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-bullseye text-green-600 text-xl"></i>
+                </div>
+                <div class="ml-4">
+                    <p class="text-sm font-medium text-gray-600">Active Goals</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ active_goals.count }}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex items-center">
+                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-chart-line text-purple-600 text-xl"></i>
+                </div>
+                <div class="ml-4">
+                    <p class="text-sm font-medium text-gray-600">Avg Progress</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ avg_goal_progress }}%</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex items-center">
+                <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-user-md text-yellow-600 text-xl"></i>
+                </div>
+                <div class="ml-4">
+                    <p class="text-sm font-medium text-gray-600">Available Therapists</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ recommended_therapists.count }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Main Content -->
+        <div class="lg:col-span-2 space-y-6">
+            <!-- Quick Actions -->
+            <div class="bg-white rounded-lg shadow">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h2 class="text-xl font-semibold text-gray-900">Quick Actions</h2>
+                </div>
+                <div class="p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <a href="/professional/therapists/" class="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-search text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900">Find Therapist</h3>
+                                <p class="text-sm text-gray-600">Search and connect with therapists</p>
+                            </div>
+                        </a>
+                        
+                        <a href="/professional/appointments/" class="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                            <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-calendar text-green-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900">My Appointments</h3>
+                                <p class="text-sm text-gray-600">Manage your sessions</p>
+                            </div>
+                        </a>
+                        
+                        <a href="/professional/goals/" class="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                            <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-bullseye text-purple-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900">Therapy Goals</h3>
+                                <p class="text-sm text-gray-600">Track your progress</p>
+                            </div>
+                        </a>
+                        
+                        <a href="/wellness/" class="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                            <div class="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-heart text-yellow-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900">Wellness Tools</h3>
+                                <p class="text-sm text-gray-600">Mood tracking & resources</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Appointments -->
+            <div class="bg-white rounded-lg shadow">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-xl font-semibold text-gray-900">Recent Appointments</h2>
+                        <a href="/professional/appointments/" class="text-blue-600 hover:text-blue-800 text-sm">View All</a>
+                    </div>
+                </div>
+                <div class="p-6">
+                    {% if recent_appointments %}
+                        <div class="space-y-4">
+                            {% for appointment in recent_appointments %}
+                            <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-user-md text-gray-600"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-900">{{ appointment.therapist.user.first_name }} {{ appointment.therapist.user.last_name }}</h3>
+                                        <p class="text-sm text-gray-600">{{ appointment.appointment_date|date:"M j, Y" }} at {{ appointment.appointment_time|time:"g:i A" }}</p>
+                                    </div>
+                                </div>
+                                <span class="px-3 py-1 rounded-full text-sm
+                                    {% if appointment.status == 'scheduled' %}bg-blue-100 text-blue-800
+                                    {% elif appointment.status == 'completed' %}bg-green-100 text-green-800
+                                    {% else %}bg-gray-100 text-gray-800{% endif %}">
+                                    {{ appointment.status|title }}
+                                </span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="text-center py-8">
+                            <i class="fas fa-calendar-times text-gray-400 text-3xl mb-4"></i>
+                            <h3 class="text-lg font-medium text-gray-900 mb-2">No Recent Appointments</h3>
+                            <p class="text-gray-600 mb-4">Start your mental health journey by booking your first session.</p>
+                            <a href="/professional/therapists/" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                Find a Therapist
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-6">
+            <!-- Active Goals -->
+            <div class="bg-white rounded-lg shadow">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-lg font-semibold text-gray-900">Active Goals</h2>
+                        <a href="/professional/goals/" class="text-blue-600 hover:text-blue-800 text-sm">View All</a>
+                    </div>
+                </div>
+                <div class="p-6">
+                    {% if active_goals %}
+                        <div class="space-y-4">
+                            {% for goal in active_goals %}
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <h3 class="font-medium text-gray-900 mb-2">{{ goal.title }}</h3>
+                                <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                                    <div class="bg-blue-600 h-2 rounded-full" style="width: {{ goal.progress_percentage }}%"></div>
+                                </div>
+                                <div class="flex justify-between text-sm text-gray-600">
+                                    <span>{{ goal.progress_percentage }}% complete</span>
+                                    <span>{{ goal.target_date|date:"M j" }}</span>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="text-center py-6">
+                            <i class="fas fa-bullseye text-gray-400 text-2xl mb-3"></i>
+                            <p class="text-gray-600 mb-3">No active goals</p>
+                            <a href="/professional/goals/" class="text-blue-600 hover:text-blue-800 text-sm">Set Your First Goal</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Recommended Therapists -->
+            <div class="bg-white rounded-lg shadow">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h2 class="text-lg font-semibold text-gray-900">Recommended Therapists</h2>
+                </div>
+                <div class="p-6">
+                    {% if recommended_therapists %}
+                        <div class="space-y-4">
+                            {% for therapist in recommended_therapists %}
+                            <div class="flex items-start space-x-3">
+                                <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-user-md text-gray-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-medium text-gray-900">{{ therapist.user.first_name }} {{ therapist.user.last_name }}</h3>
+                                    <p class="text-sm text-gray-600">{{ therapist.specializations|join:", "|truncatewords:3 }}</p>
+                                    <div class="flex items-center mt-1">
+                                        <div class="flex text-yellow-400 text-xs">
+                                            {% for i in "12345"|make_list %}
+                                                {% if forloop.counter <= therapist.rating %}
+                                                    <i class="fas fa-star"></i>
+                                                {% else %}
+                                                    <i class="far fa-star"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                        <span class="ml-1 text-xs text-gray-500">({{ therapist.total_reviews }})</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="mt-4">
+                            <a href="/professional/therapists/" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg text-center block hover:bg-blue-700 transition-colors">
+                                View All Therapists
+                            </a>
+                        </div>
+                    {% else %}
+                        <div class="text-center py-6">
+                            <i class="fas fa-user-md text-gray-400 text-2xl mb-3"></i>
+                            <p class="text-gray-600 mb-3">No therapists available</p>
+                            <a href="/professional/therapists/" class="text-blue-600 hover:text-blue-800 text-sm">Browse Therapists</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

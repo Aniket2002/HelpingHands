@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% block title %}Settings - MindBridge{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="bg-white rounded-lg shadow">
+        <div class="px-6 py-4 border-b border-gray-200">
+            <h1 class="text-2xl font-bold text-gray-900">Settings</h1>
+            <p class="text-gray-600">Manage your account preferences and privacy settings</p>
+        </div>
+        
+        <div class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Account Settings -->
+                <div class="border rounded-lg p-4">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Account Settings</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="/profile/" class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg">
+                                <div class="flex items-center">
+                                    <i class="fas fa-user w-5 h-5 text-gray-500 mr-3"></i>
+                                    <span>Edit Profile</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/settings/password/" class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg">
+                                <div class="flex items-center">
+                                    <i class="fas fa-key w-5 h-5 text-gray-500 mr-3"></i>
+                                    <span>Change Password</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/settings/email/" class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg">
+                                <div class="flex items-center">
+                                    <i class="fas fa-envelope w-5 h-5 text-gray-500 mr-3"></i>
+                                    <span>Email Preferences</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Privacy Settings -->
+                <div class="border rounded-lg p-4">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Privacy & Security</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="/settings/privacy/" class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg">
+                                <div class="flex items-center">
+                                    <i class="fas fa-shield-alt w-5 h-5 text-gray-500 mr-3"></i>
+                                    <span>Privacy Settings</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/settings/notifications/" class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg">
+                                <div class="flex items-center">
+                                    <i class="fas fa-bell w-5 h-5 text-gray-500 mr-3"></i>
+                                    <span>Notification Settings</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/settings/download/" class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg">
+                                <div class="flex items-center">
+                                    <i class="fas fa-download w-5 h-5 text-gray-500 mr-3"></i>
+                                    <span>Download My Data</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Therapy Settings -->
+                <div class="border rounded-lg p-4">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Therapy Settings</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="/professional/goals/" class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg">
+                                <div class="flex items-center">
+                                    <i class="fas fa-bullseye w-5 h-5 text-gray-500 mr-3"></i>
+                                    <span>Therapy Goals</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/professional/appointments/" class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg">
+                                <div class="flex items-center">
+                                    <i class="fas fa-calendar w-5 h-5 text-gray-500 mr-3"></i>
+                                    <span>My Appointments</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/settings/availability/" class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg">
+                                <div class="flex items-center">
+                                    <i class="fas fa-clock w-5 h-5 text-gray-500 mr-3"></i>
+                                    <span>Availability</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- System Settings -->
+                <div class="border rounded-lg p-4">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">System</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="/settings/theme/" class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg">
+                                <div class="flex items-center">
+                                    <i class="fas fa-palette w-5 h-5 text-gray-500 mr-3"></i>
+                                    <span>Theme Preferences</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/settings/language/" class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg">
+                                <div class="flex items-center">
+                                    <i class="fas fa-globe w-5 h-5 text-gray-500 mr-3"></i>
+                                    <span>Language & Region</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/logout/" class="flex items-center justify-between p-3 hover:bg-red-50 rounded-lg text-red-600">
+                                <div class="flex items-center">
+                                    <i class="fas fa-sign-out-alt w-5 h-5 mr-3"></i>
+                                    <span>Sign Out</span>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -30,6 +30,9 @@ INSTALLED_APPS = [
     'apps.chat',
     'apps.appointments',
     'apps.community',
+    'apps.professional',
+    'apps.library',
+    'apps.privacy',
 ]
 
 MIDDLEWARE = [
@@ -55,6 +58,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'apps.authentication.context_processors.user_preferences',
             ],
         },
     },

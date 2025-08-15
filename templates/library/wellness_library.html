@@ -1,0 +1,352 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Wellness Library - MindBridge{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-r from-indigo-600 to-purple-700 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold mb-4">Wellness Library</h1>
+                <p class="text-xl opacity-90 mb-8">Discover evidence-based resources for your mental health journey</p>
+                <div class="max-w-2xl mx-auto">
+                    <div class="relative">
+                        <input type="text" placeholder="Search resources, topics, or exercises..."
+                               class="w-full px-4 py-3 rounded-lg text-gray-900 pl-12">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center">
+                            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-lg shadow p-6 text-center">
+                <div class="text-3xl font-bold text-indigo-600">250+</div>
+                <div class="text-sm text-gray-600">Resources</div>
+            </div>
+            <div class="bg-white rounded-lg shadow p-6 text-center">
+                <div class="text-3xl font-bold text-green-600">15</div>
+                <div class="text-sm text-gray-600">Wellness Plans</div>
+            </div>
+            <div class="bg-white rounded-lg shadow p-6 text-center">
+                <div class="text-3xl font-bold text-purple-600">8</div>
+                <div class="text-sm text-gray-600">Categories</div>
+            </div>
+            <div class="bg-white rounded-lg shadow p-6 text-center">
+                <div class="text-3xl font-bold text-orange-600">12k+</div>
+                <div class="text-sm text-gray-600">Users Helped</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Featured Wellness Plans -->
+        <section class="mb-12">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold text-gray-900">Featured Wellness Plans</h2>
+                <a href="#" class="text-indigo-600 hover:text-indigo-700 font-medium">View All Plans</a>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- 30-Day Anxiety Management -->
+                <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition duration-150 overflow-hidden">
+                    <div class="h-48 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🧘‍♀️</div>
+                            <div class="text-sm font-medium">30-Day Challenge</div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Anxiety Management Mastery</h3>
+                        <p class="text-gray-600 text-sm mb-4">Learn practical techniques to manage anxiety through daily exercises and guided meditations.</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                            <span>🎯 Beginner</span>
+                            <span>⏰ 30 days</span>
+                            <span>👥 2.4k enrolled</span>
+                        </div>
+                        <button class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-150">
+                            Start Plan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mindfulness for Stress -->
+                <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition duration-150 overflow-hidden">
+                    <div class="h-48 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🌱</div>
+                            <div class="text-sm font-medium">Weekly Program</div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Mindfulness for Stress Relief</h3>
+                        <p class="text-gray-600 text-sm mb-4">Discover the power of mindfulness to reduce stress and improve your overall well-being.</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                            <span>🎯 Beginner</span>
+                            <span>⏰ 4 weeks</span>
+                            <span>👥 1.8k enrolled</span>
+                        </div>
+                        <button class="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition duration-150">
+                            Start Plan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sleep Better -->
+                <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition duration-150 overflow-hidden">
+                    <div class="h-48 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🌙</div>
+                            <div class="text-sm font-medium">Daily Practice</div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Better Sleep Program</h3>
+                        <p class="text-gray-600 text-sm mb-4">Improve your sleep quality with proven techniques and bedtime routines.</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                            <span>🎯 Intermediate</span>
+                            <span>⏰ 21 days</span>
+                            <span>👥 3.1k enrolled</span>
+                        </div>
+                        <button class="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition duration-150">
+                            Start Plan
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resource Categories -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Browse by Category</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <a href="#" class="bg-white rounded-lg shadow-sm hover:shadow-md transition duration-150 p-6 text-center">
+                    <div class="text-3xl mb-2">🧘‍♀️</div>
+                    <h3 class="font-semibold text-gray-900">Meditation</h3>
+                    <p class="text-sm text-gray-600">45 resources</p>
+                </a>
+                
+                <a href="#" class="bg-white rounded-lg shadow-sm hover:shadow-md transition duration-150 p-6 text-center">
+                    <div class="text-3xl mb-2">💭</div>
+                    <h3 class="font-semibold text-gray-900">Anxiety</h3>
+                    <p class="text-sm text-gray-600">38 resources</p>
+                </a>
+                
+                <a href="#" class="bg-white rounded-lg shadow-sm hover:shadow-md transition duration-150 p-6 text-center">
+                    <div class="text-3xl mb-2">😊</div>
+                    <h3 class="font-semibold text-gray-900">Depression</h3>
+                    <p class="text-sm text-gray-600">32 resources</p>
+                </a>
+                
+                <a href="#" class="bg-white rounded-lg shadow-sm hover:shadow-md transition duration-150 p-6 text-center">
+                    <div class="text-3xl mb-2">🌟</div>
+                    <h3 class="font-semibold text-gray-900">Self-Care</h3>
+                    <p class="text-sm text-gray-600">42 resources</p>
+                </a>
+                
+                <a href="#" class="bg-white rounded-lg shadow-sm hover:shadow-md transition duration-150 p-6 text-center">
+                    <div class="text-3xl mb-2">💤</div>
+                    <h3 class="font-semibold text-gray-900">Sleep</h3>
+                    <p class="text-sm text-gray-600">28 resources</p>
+                </a>
+                
+                <a href="#" class="bg-white rounded-lg shadow-sm hover:shadow-md transition duration-150 p-6 text-center">
+                    <div class="text-3xl mb-2">💪</div>
+                    <h3 class="font-semibold text-gray-900">Stress</h3>
+                    <p class="text-sm text-gray-600">35 resources</p>
+                </a>
+                
+                <a href="#" class="bg-white rounded-lg shadow-sm hover:shadow-md transition duration-150 p-6 text-center">
+                    <div class="text-3xl mb-2">❤️</div>
+                    <h3 class="font-semibold text-gray-900">Relationships</h3>
+                    <p class="text-sm text-gray-600">25 resources</p>
+                </a>
+                
+                <a href="#" class="bg-white rounded-lg shadow-sm hover:shadow-md transition duration-150 p-6 text-center">
+                    <div class="text-3xl mb-2">📖</div>
+                    <h3 class="font-semibold text-gray-900">Workbooks</h3>
+                    <p class="text-sm text-gray-600">18 resources</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- Latest Resources -->
+        <section class="mb-12">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold text-gray-900">Latest Resources</h2>
+                <a href="#" class="text-indigo-600 hover:text-indigo-700 font-medium">View All Resources</a>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Video Resource -->
+                <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition duration-150 overflow-hidden">
+                    <div class="relative">
+                        <div class="h-48 bg-gradient-to-br from-red-400 to-pink-500 flex items-center justify-center">
+                            <div class="bg-white bg-opacity-20 rounded-full p-4">
+                                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M8 5v10l7-5z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="absolute top-2 left-2">
+                            <span class="bg-red-600 text-white px-2 py-1 rounded-full text-xs font-medium">Video</span>
+                        </div>
+                        <div class="absolute bottom-2 right-2">
+                            <span class="bg-black bg-opacity-50 text-white px-2 py-1 rounded text-xs">12 min</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">5-Minute Breathing Exercise</h3>
+                        <p class="text-gray-600 text-sm mb-4">A quick breathing technique to calm your mind and reduce anxiety in stressful moments.</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                            <span>👁️ 8.2k views</span>
+                            <span>⭐ 4.8</span>
+                            <span>🎯 Beginner</span>
+                        </div>
+                        <button class="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition duration-150">
+                            Watch Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Article Resource -->
+                <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition duration-150 overflow-hidden">
+                    <div class="relative">
+                        <div class="h-48 bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center">
+                            <div class="text-4xl text-white">📄</div>
+                        </div>
+                        <div class="absolute top-2 left-2">
+                            <span class="bg-green-600 text-white px-2 py-1 rounded-full text-xs font-medium">Article</span>
+                        </div>
+                        <div class="absolute bottom-2 right-2">
+                            <span class="bg-black bg-opacity-50 text-white px-2 py-1 rounded text-xs">5 min read</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Understanding Anxiety Triggers</h3>
+                        <p class="text-gray-600 text-sm mb-4">Learn to identify and manage common anxiety triggers in your daily life.</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                            <span>👁️ 12.5k views</span>
+                            <span>⭐ 4.9</span>
+                            <span>🎯 Beginner</span>
+                        </div>
+                        <button class="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition duration-150">
+                            Read Article
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Interactive Tool -->
+                <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition duration-150 overflow-hidden">
+                    <div class="relative">
+                        <div class="h-48 bg-gradient-to-br from-purple-400 to-indigo-500 flex items-center justify-center">
+                            <div class="text-4xl text-white">🎯</div>
+                        </div>
+                        <div class="absolute top-2 left-2">
+                            <span class="bg-purple-600 text-white px-2 py-1 rounded-full text-xs font-medium">Tool</span>
+                        </div>
+                        <div class="absolute bottom-2 right-2">
+                            <span class="bg-black bg-opacity-50 text-white px-2 py-1 rounded text-xs">Interactive</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Mood Tracker Worksheet</h3>
+                        <p class="text-gray-600 text-sm mb-4">Interactive worksheet to track your daily moods and identify patterns over time.</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                            <span>👁️ 5.8k uses</span>
+                            <span>⭐ 4.7</span>
+                            <span>🎯 Intermediate</span>
+                        </div>
+                        <button class="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition duration-150">
+                            Use Tool
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Study Groups -->
+        <section class="mb-12">
+            <div class="bg-white rounded-lg shadow-sm p-8">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-2">Join Study Groups</h2>
+                    <p class="text-gray-600">Connect with others on similar wellness journeys</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-900">Anxiety Support Circle</h3>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">15/20 members</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Weekly discussions and support for managing anxiety. Safe space to share experiences and coping strategies.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-500">Starts Mon, Jan 15</span>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 text-sm">
+                                Join Group
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-900">Mindfulness Beginners</h3>
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">8/15 members</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Perfect for those new to mindfulness. Learn together through guided practices and group discussions.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-500">Starts Wed, Jan 17</span>
+                            <button class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 text-sm">
+                                Join Group
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Personal Progress -->
+        <section>
+            <div class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4">Track Your Progress</h2>
+                        <p class="text-gray-600 mb-6">See how far you've come on your wellness journey with detailed progress tracking and personalized insights.</p>
+                        <div class="space-y-3">
+                            <div class="flex items-center">
+                                <div class="w-4 h-4 bg-green-500 rounded-full mr-3"></div>
+                                <span class="text-gray-700">Resources completed: 12</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-4 h-4 bg-blue-500 rounded-full mr-3"></div>
+                                <span class="text-gray-700">Plans in progress: 2</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-4 h-4 bg-purple-500 rounded-full mr-3"></div>
+                                <span class="text-gray-700">Streak: 7 days</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <div class="inline-flex items-center justify-center w-32 h-32 bg-white rounded-full shadow-lg mb-4">
+                            <div class="text-3xl">📈</div>
+                        </div>
+                        <p class="text-lg font-semibold text-gray-900">65% Complete</p>
+                        <p class="text-sm text-gray-600">Anxiety Management Plan</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}

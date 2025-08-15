@@ -10,9 +10,38 @@ class MoodEntry(models.Model):
         (5, 'Excellent'),
     ]
     
+    EMOTION_CHOICES = [
+        ('happy', 'Happy'),
+        ('sad', 'Sad'),
+        ('anxious', 'Anxious'),
+        ('calm', 'Calm'),
+        ('stressed', 'Stressed'),
+        ('excited', 'Excited'),
+        ('angry', 'Angry'),
+        ('peaceful', 'Peaceful'),
+        ('overwhelmed', 'Overwhelmed'),
+        ('hopeful', 'Hopeful'),
+        ('lonely', 'Lonely'),
+        ('grateful', 'Grateful'),
+    ]
+    
+    ENERGY_CHOICES = [
+        (1, 'Very Low Energy'),
+        (2, 'Low Energy'),
+        (3, 'Moderate Energy'),
+        (4, 'High Energy'),
+        (5, 'Very High Energy')
+    ]
+    
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='mood_entries')
     mood_rating = models.IntegerField(choices=MOOD_CHOICES)
+    emotions = models.JSONField(default=list, help_text="List of emotions felt")
+    energy_level = models.IntegerField(choices=ENERGY_CHOICES, default=3)
+    sleep_hours = models.FloatField(null=True, blank=True, help_text="Hours of sleep last night")
+    stress_level = models.IntegerField(choices=MOOD_CHOICES, default=3, help_text="Stress level (1-5)")
     notes = models.TextField(blank=True)
+    triggers = models.TextField(blank=True, help_text="What triggered these feelings?")
+    coping_strategies = models.TextField(blank=True, help_text="What helped or might help?")
     date = models.DateField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)
     
@@ -23,6 +52,11 @@ class MoodEntry(models.Model):
     def __str__(self):
         mood_display = dict(self.MOOD_CHOICES).get(self.mood_rating, str(self.mood_rating))
         return f"{self.user.full_name} - {mood_display} ({self.date})"
+    
+    @property
+    def mood_score(self):
+        """Calculate overall mood score including energy and stress"""
+        return round((self.mood_rating + self.energy_level + (6 - self.stress_level)) / 3, 1)
 
 class WellnessGoal(models.Model):
     GOAL_TYPES = [
@@ -121,3 +155,106 @@ class WellnessActivity(models.Model):
     
     def __str__(self):
         return f"{self.user.full_name} - {self.resource.title}"
+
+
+class CrisisHotline(models.Model):
+    REGIONS = [
+        ('US', 'United States'),
+        ('CA', 'Canada'),
+        ('UK', 'United Kingdom'),
+        ('AU', 'Australia'),
+        ('INTL', 'International'),
+    ]
+    
+    name = models.CharField(max_length=200)
+    phone_number = models.CharField(max_length=20)
+    text_number = models.CharField(max_length=20, blank=True)
+    website = models.URLField(blank=True)
+    description = models.TextField()
+    region = models.CharField(max_length=4, choices=REGIONS)
+    available_24_7 = models.BooleanField(default=True)
+    languages = models.JSONField(default=list, help_text="Languages supported")
+    specialties = models.JSONField(default=list, help_text="Special focus areas")
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ['region', 'name']
+    
+    def __str__(self):
+        return f"{self.name} ({self.region})"
+
+
+class CrisisAlert(models.Model):
+    SEVERITY_LEVELS = [
+        ('low', 'Low Risk'),
+        ('medium', 'Medium Risk'),
+        ('high', 'High Risk'),
+        ('critical', 'Critical Risk'),
+    ]
+    
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='wellness_crisis_alerts')
+    severity = models.CharField(max_length=10, choices=SEVERITY_LEVELS)
+    message = models.TextField()
+    mood_triggers = models.JSONField(default=list)
+    location = models.CharField(max_length=200, blank=True)
+    emergency_contact_notified = models.BooleanField(default=False)
+    professional_contacted = models.BooleanField(default=False)
+    resolved = models.BooleanField(default=False)
+    resolved_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"Crisis Alert - {self.user.full_name} ({self.severity})"
+
+
+class PrivacyLog(models.Model):
+    ACTION_TYPES = [
+        ('login', 'User Login'),
+        ('data_access', 'Data Access'),
+        ('data_export', 'Data Export'),
+        ('data_delete', 'Data Deletion'),
+        ('profile_update', 'Profile Update'),
+        ('mood_entry', 'Mood Entry Created'),
+        ('appointment_book', 'Appointment Booked'),
+        ('crisis_alert', 'Crisis Alert Triggered'),
+    ]
+    
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='privacy_logs')
+    action = models.CharField(max_length=20, choices=ACTION_TYPES)
+    description = models.TextField()
+    ip_address = models.GenericIPAddressField()
+    user_agent = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ['-timestamp']
+    
+    def __str__(self):
+        return f"{self.user.full_name} - {self.action} ({self.timestamp})"
+
+
+class WellnessInsight(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='wellness_insights')
+    insight_type = models.CharField(max_length=50, choices=[
+        ('mood_trend', 'Mood Trend Analysis'),
+        ('sleep_pattern', 'Sleep Pattern'),
+        ('stress_trigger', 'Stress Trigger Identification'),
+        ('progress_milestone', 'Progress Milestone'),
+        ('recommendation', 'Personalized Recommendation'),
+    ])
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    data_points = models.JSONField(default=dict, help_text="Supporting data for the insight")
+    confidence_score = models.FloatField(default=0.0, help_text="AI confidence in insight (0-1)")
+    is_read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"{self.user.full_name} - {self.title}"

@@ -5,7 +5,7 @@ class SupportGroup(models.Model):
     description = models.TextField()
     category = models.CharField(max_length=100)
     members = models.ManyToManyField('authentication.CustomUser', related_name='support_groups')
-    moderators = models.ManyToManyField('authentication.CustomUser', related_name='moderated_groups')
+    moderators = models.ManyToManyField('authentication.CustomUser', related_name='community_moderated_groups')
     is_private = models.BooleanField(default=False)
     max_members = models.IntegerField(default=50)
     created_at = models.DateTimeField(auto_now_add=True)

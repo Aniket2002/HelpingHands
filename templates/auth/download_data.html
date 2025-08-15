@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+
+{% block title %}Download My Data - MindBridge{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="bg-white rounded-lg shadow">
+        <!-- Header -->
+        <div class="px-6 py-4 border-b border-gray-200">
+            <div class="flex items-center">
+                <a href="/settings/" class="text-gray-500 hover:text-gray-700 mr-4">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900">Download My Data</h1>
+                    <p class="text-gray-600">Export your personal data and account information</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Content -->
+        <div class="p-6">
+            <div class="space-y-6">
+                <div class="bg-blue-50 border-l-4 border-blue-400 p-4">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-info-circle text-blue-400"></i>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-sm font-medium text-blue-800">Data Export Information</h3>
+                            <div class="mt-2 text-sm text-blue-700">
+                                <p>You can request a copy of your personal data stored in our system. This includes:</p>
+                                <ul class="list-disc list-inside mt-2 space-y-1">
+                                    <li>Profile information and account settings</li>
+                                    <li>Mood tracking data and wellness logs</li>
+                                    <li>Therapy goals and progress notes</li>
+                                    <li>Appointment history (non-clinical data only)</li>
+                                    <li>Community posts and interactions</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-file-download text-blue-600 text-xl mr-3"></i>
+                            <h3 class="font-medium text-gray-900">Complete Data Export</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">Download all your data in JSON format</p>
+                        <button onclick="requestDataExport('complete')" 
+                                class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700">
+                            Request Complete Export
+                        </button>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-chart-line text-green-600 text-xl mr-3"></i>
+                            <h3 class="font-medium text-gray-900">Progress Report</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">Download your therapy progress summary</p>
+                        <button onclick="requestDataExport('progress')" 
+                                class="w-full px-4 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700">
+                            Download Report
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-exclamation-triangle text-yellow-400"></i>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-sm font-medium text-yellow-800">Important Notes</h3>
+                            <div class="mt-2 text-sm text-yellow-700">
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Data exports may take up to 24 hours to process</li>
+                                    <li>You'll receive an email when your download is ready</li>
+                                    <li>Download links expire after 7 days for security</li>
+                                    <li>Clinical notes from therapists are not included for privacy</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="border-t pt-6">
+                    <h3 class="font-medium text-gray-900 mb-4">Recent Export Requests</h3>
+                    <div class="space-y-3">
+                        <div class="text-center text-gray-500 py-8">
+                            <i class="fas fa-inbox text-4xl text-gray-300 mb-2"></i>
+                            <p>No export requests yet</p>
+                            <p class="text-sm">Your data export history will appear here</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-end space-x-3 pt-6 border-t">
+                    <a href="/settings/" class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50">
+                        Back to Settings
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function requestDataExport(type) {
+    // Simulate data export request
+    const button = event.target;
+    const originalText = button.textContent;
+    
+    button.disabled = true;
+    button.textContent = 'Processing...';
+    button.classList.add('opacity-50');
+    
+    setTimeout(() => {
+        button.disabled = false;
+        button.textContent = originalText;
+        button.classList.remove('opacity-50');
+        
+        // Show success message
+        const alertDiv = document.createElement('div');
+        alertDiv.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+        alertDiv.innerHTML = `
+            <div class="flex items-center">
+                <i class="fas fa-check-circle mr-2"></i>
+                <span>${type === 'complete' ? 'Complete data export' : 'Progress report'} requested! You'll receive an email when ready.</span>
+            </div>
+        `;
+        document.body.appendChild(alertDiv);
+        
+        setTimeout(() => {
+            document.body.removeChild(alertDiv);
+        }, 5000);
+    }, 2000);
+}
+</script>
+{% endblock %}

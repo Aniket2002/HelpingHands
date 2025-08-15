@@ -39,6 +39,16 @@ class CustomUser(AbstractUser):
     @property
     def full_name(self):
         return f"{self.first_name} {self.last_name}".strip()
+    
+    @property
+    def profile_picture_url(self):
+        """Safely get profile picture URL or default"""
+        if self.profile_picture and hasattr(self.profile_picture, 'url'):
+            try:
+                return self.profile_picture.url
+            except (ValueError, AttributeError):
+                return '/static/default-avatar.svg'
+        return '/static/default-avatar.svg'
 
 class UserProfile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='profile')
